@@ -11,6 +11,10 @@ const UserDataModel = new Schema({
         type: Date
     },
     gender: { type: String, require: true },
+    address: { type: String, require: true },
+    emergencyContactName: { type: String, require: true },
+    emergencyContactNumber: { type: String, require: true },
+    insuranceDetails: { type: String },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserAuth",
