@@ -1,6 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
-
+import React, { useContext, useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -18,10 +16,15 @@ import loginImg from '../../assets/login.jpg';
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import LoginIcon from '@mui/icons-material/Login';
+import CircularProgress from "@mui/material/CircularProgress";
 import './GetStarted.css'
 import { Modal, ModalBody, ModalFooter, ModalHeader, TabContent, TabPane } from "reactstrap";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const GetStarted = (props) => {
+    const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState("1");
     const [email, setEmail] = useState("")
     const [name,setName] = useState("")
@@ -37,17 +40,44 @@ const GetStarted = (props) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const [loading, setLoading] = React.useState(false);
+    const [loading, setLoading] = useState(false);
   
    const handleClick=()=>{
     console.log(email, pass);
-    setLoading(true)
-    setTimeout(() => {
-
-        setLoading(false);
-        console.log(loading);
-      }, 2000);
+    // setLoading(true)
+    
    
+   }
+   const handleLoginClick=async()=>{
+   setLoading(false)
+
+    const formData ={
+        email:email,
+        password:pass
+    }
+    console.log(formData);
+    const response = await axios.post(`http://localhost:8989/UserAuth/login`,
+    formData,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    try {
+        const data = await response.data
+    console.log(response)
+    if(data.tokenid){
+        localStorage.clear()
+        localStorage.setItem('token',data.tokenid);
+        alert("Logged In")
+        navigate('/')
+    }
+    else{
+        alert("Check Sign up credentials")
+    }
+    } catch (error) {
+       alert(error) 
+    }
+    setLoading(true)
    }
    const handleInputChange = (e) => {
     const {id , value} = e.target;
@@ -76,8 +106,8 @@ const GetStarted = (props) => {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleFirstPass= () => setShowFirstPassword((show)=>!show);
     const handleConfPass= () => setShowConfPassword((show)=>!show);
-    return (
-        <>
+    return (<>
+        {loading?<CircularProgress/>:<>
             <Modal
                 sg="xl"
                 isOpen={props.isModalOpen}
@@ -150,7 +180,7 @@ const GetStarted = (props) => {
                                             <div className="submit_div">
                                                 <LoadingButton
                                                 className='modal_button'
-                                                    onClick={handleClick}
+                                                    onClick={handleLoginClick}
                                                     loading={loading}
                                                     loadingPosition="start"
                                                     startIcon={<LoginIcon />}
@@ -299,7 +329,8 @@ const GetStarted = (props) => {
                 </ModalBody>
 
             </Modal>
-        </>
+        </>}
+    </>
     )
 }
 export default GetStarted;

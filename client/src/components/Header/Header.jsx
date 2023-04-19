@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext, useEffect, useState } from "react";
 // import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,14 +6,12 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
+import jwt_decode from "jwt-decode";
+import Context  from '../Store/Context';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { styled, useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -23,12 +21,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import { useNavigate } from 'react-router-dom';
+import GetStarted from "../GetStarted/GetStarted";
+
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -79,12 +78,41 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 function Header() {
-    const [auth, setAuth] = React.useState(true);
+    const [auth, setAuth] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
+    const {state,dispatch} = useContext(Context)
+	const [show,setShow]= useState(false)
+	const navigate = useNavigate();
+	const [admin, setAdmin] = useState(false)
+	const [username,setUser] = useState('')
+	const toggle = () => setShow(prevState=>!prevState);
+	// console.log(username);
+	// console.log(state.name);
+	useEffect(()=>{
+		const token = localStorage.getItem('token')
+		
+		if(token){
+			
+			const userdata = jwt_decode(token)
+			if(!userdata){
+				localStorage.removeItem('token')
+				navigate('/login')
+			}
+			else{
+				setUser(userdata.user.name)
+				const fname = userdata.user.name.split(' ')[0]
+				// dispatch({type:'UPDATE_NAME',payload:fname})
+				if(userdata.user.admin==true){
+					setAdmin(true)
+				}
+                setAuth(true)
+				console.log(userdata);
+                setShow(false)
+			}
+			
+		}
+	},[localStorage.getItem('token')])
+    
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -173,7 +201,7 @@ function Header() {
                     ) :
                         <>
                             <div className="link_but">
-                                <button onClick={() => { setAuth(true) }} className="login_but">Login</button>
+                                <button onClick={() => { setShow(true) }} className="login_but">Login</button>
                             </div>
                         </>}
                 </Toolbar>
@@ -249,6 +277,7 @@ function Header() {
         </List>
 
       </Drawer>
+      <GetStarted isModalOpen={show} toggleModal={toggle} setShow={setShow}/>
         </Box>
     );
 }
