@@ -34,7 +34,9 @@ const UserDataModel = new Schema({
     allergies: {
         type: String
     },
-    reports:
+    employmentStatus: {
+        type: String
+    },
 });
 
 module.exports = mongoose.model("UserData", UserDataModel);
