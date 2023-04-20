@@ -5,19 +5,23 @@ import { Provider } from './components/Store/Context';
 import { initialState, reducer } from './components/Store/userReduce';
 import Home from './components/Home/Home'
 import Patient from './components/Patient/Patient'
+import { SnackbarProvider } from 'notistack';
 
 
 function App() {
   const [state,dispatch] = useReducer(reducer,initialState)
   return (
     <div className="App">
-      <Provider value={{state,dispatch}}></Provider>
+          <SnackbarProvider maxSnack={3}>
+      <Provider value={{state,dispatch}}>
       <Router>
         <Routes>
           <Route exact path='/' element={<Home />} /> 
           <Route exact path='/Patient/:id' element={<Patient />} /> 
         </Routes>  
       </Router> 
+      </Provider>
+          </SnackbarProvider>
     </div>
   );
 }

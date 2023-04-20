@@ -53,10 +53,10 @@ const login = async(req,res,next)=>{
         })
     } catch (error) {
         console.log(error);
-        return res.status(500).json({message:"Login failed"})
+        return res.status(500).json({status:"Login failed",message:"error"})
     }
     if(!user){
-        return res.status(500).json({message:"Login failed"})
+        return res.status(500).json({status:"Login failed",message:"User not found"})
     }
     const token = jwt.sign({user}, privateKey)  
     return res.status(200).json({status:"Login Successful",tokenid: token})

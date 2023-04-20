@@ -78,9 +78,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 function Header() {
+
+
+    const {state,dispatch} = useContext(Context)
     const [auth, setAuth] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const {state,dispatch} = useContext(Context)
 	const [show,setShow]= useState(false)
 	const navigate = useNavigate();
 	const [admin, setAdmin] = useState(false)
@@ -101,13 +103,13 @@ function Header() {
 			else{
 				setUser(userdata.user.name)
 				const fname = userdata.user.name.split(' ')[0]
-				// dispatch({type:'UPDATE_NAME',payload:fname})
+				dispatch({type:'UPDATE_NAME',payload:fname})
 				if(userdata.user.admin==true){
 					setAdmin(true)
 				}
                 setAuth(true)
-				console.log(userdata);
-                setShow(false)
+				console.log(userdata,fname);
+                // setShow(false)
 			}
 			
 		}
@@ -122,7 +124,11 @@ function Header() {
         setAnchorEl(null);
     };
     const logout = () => {
-        setAuth(false)
+        localStorage.clear()
+        setAdmin(false)
+        setAdmin(false)
+		navigate('/')
+		window.location.reload()
     };
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -139,18 +145,7 @@ function Header() {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            {/* <FormGroup>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={auth}
-                            onChange={handleChange}
-                            aria-label="login switch"
-                        />
-                    }
-                    label={auth ? 'Logout' : 'Login'}
-                />
-            </FormGroup> */}
+            
             <AppBar className='header_main' style={{ backgroundColor: "#f3eded", color: "#000000" }} position="fixed" open={open}>
                 <Toolbar >
                     <IconButton
