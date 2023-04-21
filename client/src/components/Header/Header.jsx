@@ -85,6 +85,7 @@ function Header() {
     const [anchorEl, setAnchorEl] = React.useState(null);
 	const [show,setShow]= useState(false)
 	const navigate = useNavigate();
+    const [userID,setUserID]= useState('');
 	const [admin, setAdmin] = useState(false)
 	const [username,setUser] = useState('')
 	const toggle = () => setShow(prevState=>!prevState);
@@ -102,6 +103,7 @@ function Header() {
 			}
 			else{
 				setUser(userdata.user.name)
+                setUserID(userdata.user._id)
 				const fname = userdata.user.name.split(' ')[0]
 				dispatch({type:'UPDATE_NAME',payload:fname})
 				if(userdata.user.admin==true){
@@ -242,7 +244,7 @@ function Header() {
                 <ListItemIcon>
                     <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Patient Profile" />
+                <ListItemText onClick={()=>{navigate(`/Patient/${userID}`)}} primary="Patient Profile" />
             </ListItemButton>
         </ListItem>
         <ListItem>

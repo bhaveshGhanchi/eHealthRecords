@@ -1,4 +1,5 @@
 const UserDataModel = require("../models/UserDataModel");
+const UserAuthModel = require('../models/UserAuthModel')
 const { route } = require("../uploadFile");
 const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require("firebase/storage");
 const storage = getStorage();
@@ -9,7 +10,7 @@ const registerPatient = async (req, res, next) => {
     const { dob, userid, height, weight } = req.body
     const files = req.files;
     let dpData
-    
+
     const medRec = []
     const giveCurrentDateTime = () => {
         const today = new Date();
@@ -18,13 +19,18 @@ const registerPatient = async (req, res, next) => {
         const dateTime = date + ' ' + time;
         return dateTime;
     };
+    let user
     try {
+        user = await UserDataModel.findOne({ user: userid })
+        if (user) {
+            return res.status(500).json({ message: "User already registered" })
+        }
         await files.forEach(async element => {
             if (element.fieldname === "displayPic") {
                 const dateTime = giveCurrentDateTime();
 
-                const storageRef = ref(storage, `files/${userid}/${"Dp"+"-"+userid+"_"+dateTime}`);
-        
+                const storageRef = ref(storage, `files/${userid}/${"Dp" + "-" + userid + "_" + dateTime}`);
+
                 // Create file metadata including the content type
                 const metadata = {
                     contentType: element.mimetype,
@@ -32,19 +38,19 @@ const registerPatient = async (req, res, next) => {
                 };
                 const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
                 //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-        
+
                 // Grab the public url
                 let URL = await getDownloadURL(snapshot.ref);
-                 dpData ={
-                    path:URL,
-                    metadata:metadata 
+                dpData = {
+                    path: URL,
+                    metadata: metadata
                 }
             }
-            else if(element.fieldname === "records"){
+            else if (element.fieldname === "records") {
                 const dateTime = giveCurrentDateTime();
 
-                const storageRef = ref(storage, `files/${userid}/${"Record"+"-"+userid+"_"+dateTime}`);
-        
+                const storageRef = ref(storage, `files/${userid}/${"Record" + "-" + userid + "_" + dateTime}`);
+
                 // Create file metadata including the content type
                 const metadata = {
                     contentType: element.mimetype,
@@ -52,27 +58,27 @@ const registerPatient = async (req, res, next) => {
                 };
                 const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
                 //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-        
+
                 // Grab the public url
                 let recordURL = await getDownloadURL(snapshot.ref);
                 let Data = {
-                    path:recordURL,
-                    metadata:metadata 
+                    path: recordURL,
+                    metadata: metadata
                 }
                 medRec.push(Data)
             }
 
             // console.log(dpData,medRec);
         })
-        const BMI = parseInt(weight/(height*height))
-        const userData =new UserDataModel({
+        const BMI = parseInt(weight / (height * height))
+        const userData = new UserDataModel({
             DisplayPic: dpData,
             DOB: dob,
-            user:userid,
+            user: userid,
             height: height,
-            weight:weight,
-            bmi:BMI,
-            medicalRecords:medRec
+            weight: weight,
+            bmi: BMI,
+            medicalRecords: medRec
         })
         await userData.save()
 
@@ -84,5 +90,26 @@ const registerPatient = async (req, res, next) => {
     }
 }
 
+const GetPatientData = (req, res) => {
+    try {
+        const { id } = req.params;
 
-module.exports = {registerPatient};
+        // console.log(id);
+        UserDataModel.findOne({ user: id })
+            .populate('user')
+            .exec()
+            .then((data) => {
+                
+                res.json(data);
+                
+            })
+
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+
+
+
+module.exports = { registerPatient, GetPatientData };
