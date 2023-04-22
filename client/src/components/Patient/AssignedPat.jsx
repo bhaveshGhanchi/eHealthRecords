@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./Patient.css";
+import "./doctor.css";
+import doctor1 from './../../assets/pat1.jpg';
 import Header from "../Header/Header";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,103 +23,120 @@ const AssignedPat = () => {
           <CircularProgress />
         ) : (
           <>
-            <section className="demographics">
-              <div className="divHead">
-                <h4>General Information</h4>
-                <Divider orientation="vertical" flexItem />
-              </div>
-              <div className="gridOuter">
-                <Grid container spacing={4} rowSpacing={-4} columnSpacing={-4}>
-                  <Grid className="gridInner" xs={12} md={6}>
-                    <Avatar
-                      sx={{ height: "120px", width: "120px" }}
-                      src=""
-                      alt={id}
-                    />
-                  </Grid>
-                  <Grid className="gridInner" xs={12} md={6}>
-                    <div className="innerGridDetails">
-                      <Grid
-                        container
-                        rowSpacing={1}
-                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                      >
-                        <Grid item xs={6}>
-                          <h5>patient id:</h5>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h5> 18902</h5>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Name:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Patient name</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Email:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>email@something.com</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>phone no:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>1234567890</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Age:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>34</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Gender</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Male</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>DOB:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>23/03/2002</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>address:</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Voluptatem atque maiores optio quasi sint
-                            exercitationem quas reprehenderit quisquam, maxime
-                            possimus, facilis quam ad vel quibusdam mollitia,
-                            dolorem facere corporis provident?
-                          </h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>maritialStatus</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>No</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>employmentStatus</h6>
-                        </Grid>
-                        <Grid item xs={6}>
-                          <h6>Unemployed</h6>
-                        </Grid>
-                      </Grid>
+            <div className="contacts">
+                <div className="contact-card">
+                    
+                    <img src={doctor1} className="incircle" />
+                    
+                    <div className="InsidePatInfo">
+                        <h2>Ms. Mary Dsouza</h2>
+                        <div className="info-group">
+                          <p className="title1" >Id: </p>
+                          <p className="sub1" > 261409</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Age: </p>
+                          <p className="sub1" > 22 Years</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Symptoms:</p>
+                          <p className="sub1" >Cold, Cough and Fever</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Disease: </p>
+                          <p className="sub1" > Diabetes</p></div>
+                        <br />
+                        <button className="footeDoc">View Full Profile</button>
                     </div>
-                  </Grid>
-                  {/* <Grid className="imageGrid" xs={0} md={3}>
-
-                    </Grid> */}
-                  <Grid className="gridInner" xs={12} md={12}></Grid>
-                </Grid>
-              </div>
-            </section>
+                    
+                </div>  
+                <div className="contact-card">
+                <img src={doctor1} className="incircle" />
+                    
+                <div className="InsidePatInfo">
+                        <h2>Ms. Mary Dsouza</h2>
+                        <div className="info-group">
+                          <p className="title1" >Id: </p>
+                          <p className="sub1" > 261409</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Age: </p>
+                          <p className="sub1" > 22 Years</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Symptoms:</p>
+                          <p className="sub1" >Cold, Cough and Fever</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Disease: </p>
+                          <p className="sub1" > - </p></div>
+                        <br />
+                        <button className="footeDoc">View Full Profile</button>
+                    </div>
+                    
+                </div>
+                <div className="contact-card">
+                <img src={doctor1} className="incircle" />
+                    
+                  <div className="InsidePatInfo">
+                        <h2>Ms. Mary Dsouza</h2>
+                        <div className="info-group">
+                          <p className="title1" >Id: </p>
+                          <p className="sub1" > 261409</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Age: </p>
+                          <p className="sub1" > 22 Years</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Symptoms:</p>
+                          <p className="sub1" >Cold, Cough and Fever</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Disease: </p>
+                          <p className="sub1" > Cancer</p></div>
+                        <br />
+                        <button className="footeDoc">View Full Profile</button>
+                    </div>
+                    
+                </div>
+                <div className="contact-card">
+                    
+                    <img src={doctor1} className="incircle" />
+                    
+                    <div className="InsidePatInfo">
+                        <h2>Ms. Mary Dsouza</h2>
+                        <div className="info-group">
+                          <p className="title1" >Id: </p>
+                          <p className="sub1" > 261409</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Age: </p>
+                          <p className="sub1" > 22 Years</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Symptoms:</p>
+                          <p className="sub1" >Cold, Cough and Fever</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Disease: </p>
+                          <p className="sub1" > Diabetes</p></div>
+                        <br />
+                        <button className="footeDoc">View Full Profile</button>
+                    </div>
+                    
+                </div><div className="contact-card">
+                    
+                    <img src={doctor1} className="incircle" />
+                    
+                    <div className="InsidePatInfo">
+                        <h2>Ms. Mary Dsouza</h2>
+                        <div className="info-group">
+                          <p className="title1" >Id: </p>
+                          <p className="sub1" > 261409</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Age: </p>
+                          <p className="sub1" > 22 Years</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Symptoms:</p>
+                          <p className="sub1" >Cold, Cough and Fever</p></div>
+                        <div className="info-group">
+                          <p className="title1" >Disease: </p>
+                          <p className="sub1" > Diabetes</p></div>
+                        <br />
+                        <button className="footeDoc">View Full Profile</button>
+                    </div>
+                    
+                </div>
+            </div>
             {!admin ? (
               <>
                 <section className="demographics">

@@ -5,6 +5,7 @@ import { Provider } from './components/Store/Context';
 import { initialState, reducer } from './components/Store/userReduce';
 import Home from './components/Home/Home'
 import Patient from './components/Patient/Patient'
+import AssignedPat from './components/Patient/AssignedPat';
 import { SnackbarProvider } from 'notistack';
 
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} /> 
           <Route exact path='/Patient/:id' element={<Patient />} /> 
+          <Route exact path='/Patients' element={<AssignedPat />} />
         </Routes>  
       </Router> 
       </Provider>
