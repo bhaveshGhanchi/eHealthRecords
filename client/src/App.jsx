@@ -20,6 +20,7 @@ function App() {
           <Route exact path='/' element={<Home />} /> 
           <Route exact path='/Patient/:id' element={<Patient />} /> 
           <Route exact path='/Patients' element={<AssignedPat />} />
+          
         </Routes>  
       </Router> 
       </Provider>

@@ -244,7 +244,7 @@ function Header() {
                 <ListItemIcon>
                     <AccountBoxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Assigned Patients" />
+                <ListItemText onClick={()=>{navigate(`/Patients`)}} primary="Assigned Patients" />
             </ListItemButton>
         </ListItem>
         <ListItem>

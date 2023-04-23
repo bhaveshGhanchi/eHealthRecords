@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import "./Patient.css";
+import AddReport from "./AddReport";
 import Header from "../Header/Header";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -480,7 +481,7 @@ const Patient = () => {
                                                     >
                                                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
                                                             <Link href="#" color="inherit" underline="hover">
-                                                                Prescription_file_name
+                                                                Add Prescription_file1
                                                             </Link>
 
                                                         </Typography>
@@ -493,154 +494,7 @@ const Patient = () => {
                                                                 rowSpacing={-4}
                                                                 columnSpacing={-4}
                                                             >
-                                                                <Grid className="gridInner" xs={12}>
-                                                                    <div className="innerGridDetails">
-                                                                        <Grid
-                                                                            container
-                                                                            rowSpacing={1}
-                                                                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                                                                        >
-                                                                            <Grid item xs={5}>
-                                                                                <h6>Dr:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>Harish Rai</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>RBC:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>WBC:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>platelet:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>ESR:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>glucose:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>cholesterol:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>thyroid:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                        </Grid>
-                                                                    </div>
-                                                                </Grid>
-                                                                {/* <Grid className="imageGrid" xs={0} md={3}>
-
-                    </Grid> */}
-                                                                <Grid className="gridInner" xs={12} md={12}></Grid>
-                                                            </Grid>
-                                                        </Typography>
-                                                    </AccordionDetails>
-                                                </Accordion>
-                                                {/* Pannel 2 */}
-                                                <Accordion expanded={expandedPres === 'panel2'} onChange={handleChangePres('panel2')}>
-                                                    <AccordionSummary
-                                                        expandIcon={<ExpandMoreIcon />}
-                                                        aria-controls="panel1bh-content"
-                                                        id="panel1bh-header"
-                                                    >
-                                                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                                        <Link href="#" color="inherit" underline="hover">
-                                                                Prescription_file_name2
-                                                            </Link>
-
-                                                        </Typography>
-                                                    </AccordionSummary>
-                                                    <AccordionDetails>
-                                                        <Typography>
-                                                            <Grid
-                                                                container
-                                                                spacing={4}
-                                                                rowSpacing={-4}
-                                                                columnSpacing={-4}
-                                                            >
-                                                                <Grid className="gridInner" xs={12}>
-                                                                    <div className="innerGridDetails">
-                                                                        <Grid
-                                                                            container
-                                                                            rowSpacing={1}
-                                                                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                                                                        >
-                                                                            <Grid item xs={5}>
-                                                                                <h6>Dr:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>Harish Rai</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>RBC:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>WBC:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>platelet:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>ESR:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>glucose:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>cholesterol:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={5}>
-                                                                                <h6>thyroid:</h6>
-                                                                            </Grid>
-                                                                            <Grid item xs={7}>
-                                                                                <h6>12.5</h6>
-                                                                            </Grid>
-                                                                        </Grid>
-                                                                    </div>
-                                                                </Grid>
-                                                   
-                                                                <Grid className="gridInner" xs={12} md={12}></Grid>
+                                                                <AddReport/>
                                                             </Grid>
                                                         </Typography>
                                                     </AccordionDetails>
