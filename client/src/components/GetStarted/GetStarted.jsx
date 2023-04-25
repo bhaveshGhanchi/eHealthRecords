@@ -114,8 +114,8 @@ const GetStarted = (props) => {
             if (data.tokenid) {
                 localStorage.clear()
                 localStorage.setItem('token', data.tokenid);
+                enqueueSnackbar("Successful login", { autoHideDuration: 3000, variant: 'success' });
                 navigate('/')
-                enqueueSnackbar("Successful login", { autoHideDuration: 1000, variant: 'success' });
             }
             else {
 

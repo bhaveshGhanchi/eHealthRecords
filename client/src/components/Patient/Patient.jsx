@@ -42,8 +42,9 @@ const Patient = () => {
     async function getUserData() {
         try {
             const response = await axios.get(`http://localhost:8989/UserData/GetPatientDetails/${id}`);
-            await setData(response.data);
-            
+            // console.log(response.data);
+            setData(response.data)
+            // console.log(userdata);
         }
         catch (error) {
             console.log(error);
@@ -51,9 +52,9 @@ const Patient = () => {
     }
     useEffect(() => {
         getUserData();
-        // console.log(userdata);
+        console.log(userdata);
     }, [])
-    console.log(userdata);
+    
     return (
         <>
             <Header />

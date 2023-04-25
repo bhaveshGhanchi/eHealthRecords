@@ -7,10 +7,11 @@ const storage = getStorage();
 
 
 const registerPatient = async (req, res, next) => {
-    const { dob, userid, height, weight } = req.body
+    const { DOB, height, weight, gender, address, emergencyContactName, emergencyContactNumber, maritialStatus, age } = req.body
+    const { userid ,medicalHistory,allergies,employmentStatus} = req.body
     const files = req.files;
     let dpData
-
+    console.log(req.body);
     const medRec = []
     const giveCurrentDateTime = () => {
         const today = new Date();
@@ -25,60 +26,75 @@ const registerPatient = async (req, res, next) => {
         if (user) {
             return res.status(500).json({ message: "User already registered" })
         }
-        await files.forEach(async element => {
-            if (element.fieldname === "displayPic") {
-                const dateTime = giveCurrentDateTime();
+        if (files) {
 
-                const storageRef = ref(storage, `files/${userid}/${"Dp" + "-" + userid + "_" + dateTime}`);
+            await files.forEach(async element => {
+                if (element.fieldname === "displayPic") {
+                    const dateTime = giveCurrentDateTime();
 
-                // Create file metadata including the content type
-                const metadata = {
-                    contentType: element.mimetype,
-                    info: "User Display Picture"
-                };
-                const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
-                //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
+                    const storageRef = ref(storage, `files/${userid}/${"Dp" + "-" + userid + "_" + dateTime}`);
 
-                // Grab the public url
-                let URL = await getDownloadURL(snapshot.ref);
-                dpData = {
-                    path: URL,
-                    metadata: metadata
+                    // Create file metadata including the content type
+                    const metadata = {
+                        contentType: element.mimetype,
+                        info: "User Display Picture"
+                    };
+                    const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
+                    //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
+
+                    // Grab the public url
+                    let URL = await getDownloadURL(snapshot.ref);
+                    dpData = {
+                        path: URL,
+                        metadata: metadata
+                    }
                 }
-            }
-            else if (element.fieldname === "records") {
-                const dateTime = giveCurrentDateTime();
+                else if (element.fieldname === "records") {
+                    const dateTime = giveCurrentDateTime();
 
-                const storageRef = ref(storage, `files/${userid}/${"Record" + "-" + userid + "_" + dateTime}`);
+                    const storageRef = ref(storage, `files/${userid}/${"Record" + "-" + userid + "_" + dateTime}`);
 
-                // Create file metadata including the content type
-                const metadata = {
-                    contentType: element.mimetype,
-                    info: "User medical records"
-                };
-                const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
-                //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
+                    // Create file metadata including the content type
+                    const metadata = {
+                        contentType: element.mimetype,
+                        info: "User medical records"
+                    };
+                    const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
+                    //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
 
-                // Grab the public url
-                let recordURL = await getDownloadURL(snapshot.ref);
-                let Data = {
-                    path: recordURL,
-                    metadata: metadata
+                    // Grab the public url
+                    let recordURL = await getDownloadURL(snapshot.ref);
+                    let Data = {
+                        path: recordURL,
+                        metadata: metadata
+                    }
+                    medRec.push(Data)
                 }
-                medRec.push(Data)
-            }
 
-            // console.log(dpData,medRec);
-        })
+                // console.log(dpData,medRec);
+            })
+        }
         const BMI = parseInt(weight / (height * height))
         const userData = new UserDataModel({
-            DisplayPic: dpData,
-            DOB: dob,
+            demographics:{
+                DisplayPic: dpData,
+                DOB: DOB,
+                gender: gender,
+                address: address,
+                emergencyContactName:emergencyContactName,
+                emergencyContactNumber:emergencyContactNumber,
+                height: height,
+                weight: weight,
+                maritialStatus: maritialStatus,
+                age: age
+            },
+            
+            // insuranceDetails: { type: String },
             user: userid,
-            height: height,
-            weight: weight,
-            bmi: BMI,
-            medicalRecords: medRec
+            
+            medicalHistory: medicalHistory,
+            allergies: allergies,
+            employmentStatus: employmentStatus
         })
         await userData.save()
 
@@ -97,11 +113,11 @@ const GetPatientData = (req, res) => {
         // console.log(id);
         UserDataModel.findOne({ user: id })
             .populate('user')
-            .exec()
+            // .exec()
             .then((data) => {
-                
+                console.log(data);
                 res.json(data);
-                
+
             })
 
     } catch (error) {

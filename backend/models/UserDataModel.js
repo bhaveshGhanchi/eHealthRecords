@@ -45,30 +45,7 @@ const UserDataModel = new Schema({
     employmentStatus: {
         type: String
     },
-    haemoglobin: {
-        type: Number
-    },
-    RBC: {
-        type: Number
-    },
-    WBC: {
-        type: Number
-    },
-    platelet: {
-        type: Number
-    },
-    ESR: {
-        type: Number
-    },
-    glucose: {
-        type: Number
-    },
-    cholesterol: {
-        type: Number
-    },
-    thyroid: {
-        type: Number
-    },
+    
     reports:[{
         url:String,
         details:{
@@ -77,9 +54,7 @@ const UserDataModel = new Schema({
             PCV: Number,
             MCV:Number,
             MCH: Number,
-            MCHC: Number,
-            
-            
+
         }
 
     }]
