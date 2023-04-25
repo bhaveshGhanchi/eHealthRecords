@@ -77,7 +77,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 function Header() {
   const { state, dispatch } = useContext(Context);
-  const [auth, setAuth] = React.useState(false);
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
@@ -134,14 +134,14 @@ function Header() {
   
 
   const navHead = [
-    ["Patient Profile", "Appointments", "Report", "Bills"],
+    ["Profile", "Report", "Bills"],
     ["Profile", "Patient List"],
     ["Profile", "Patient List", "Doctors List"],
   ];
   const navIcon = [
     [
       <AccountBoxIcon />,
-      <CalendarMonthIcon />,
+      
       <SummarizeIcon />,
       <ReceiptLongIcon />,
     ],
@@ -150,8 +150,8 @@ function Header() {
   ];
 
   const navlink = [
-    [`/Patient/${userID}`, "#", "#", "#"],
-    ["#", "/Patients"],
+    [`/Patient/${userID}`, "#", "#"],
+    ["/doctor", "/Patients"],
     ["#", "/Patients", "/Patients"],
   ];
 // console.log(navlink[role]);
