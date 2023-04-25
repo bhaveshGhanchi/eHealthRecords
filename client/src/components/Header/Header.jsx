@@ -77,7 +77,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 function Header() {
   const { state, dispatch } = useContext(Context);
-  const [auth, setAuth] = React.useState(true);
+  const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
