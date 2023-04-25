@@ -7,6 +7,8 @@ import Home from './components/Home/Home'
 import Patient from './components/Patient/Patient'
 import AssignedPat from './components/Patient/PatAssign';
 import Profile from './components/Doctor/Profile';
+import AllDoc from './components/Foradmin/AllDoc';
+import AllPat from './components/Foradmin/AllPat';
 import { SnackbarProvider } from 'notistack';
 
 
@@ -22,6 +24,8 @@ function App() {
           <Route exact path='/Patient/:id' element={<Patient />} /> 
           <Route exact path='/Doctor' element={<Profile />} /> 
           <Route exact path='/Patients' element={<AssignedPat />} />
+          <Route exact path='/AllDoctor' element={<AllDoc />} /> 
+          <Route exact path='/AllPatient' element={<AllPat />} /> 
 
           
         </Routes>  
