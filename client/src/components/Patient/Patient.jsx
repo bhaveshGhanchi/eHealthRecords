@@ -52,9 +52,8 @@ const Patient = () => {
     }
     useEffect(() => {
         getUserData();
-        console.log(userdata);
     }, [])
-    
+    console.log(userdata);
     return (
         <>
             <Header />
@@ -94,7 +93,7 @@ const Patient = () => {
                                                     <h6>Name:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    {/* <h6>{userdata.user.name}</h6> */}
+                                                    <h6></h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>Email:</h6>

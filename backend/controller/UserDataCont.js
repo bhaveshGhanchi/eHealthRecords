@@ -90,14 +90,15 @@ const registerPatient = async (req, res, next) => {
             },
             
             // insuranceDetails: { type: String },
-            user: userid,
             
+            user:userid,
             medicalHistory: medicalHistory,
             allergies: allergies,
             employmentStatus: employmentStatus
         })
         await userData.save()
-
+        const userauth = await UserAuthModel.findOneAndUpdate({_id:userid},{user:userData._id})
+        userauth.save()
         // const savedUserData = await 
         // console.log(dpData,medRec);
         res.json(userData);
@@ -124,6 +125,8 @@ const GetPatientData = (req, res) => {
         res.json(error)
     }
 }
+
+
 
 
 

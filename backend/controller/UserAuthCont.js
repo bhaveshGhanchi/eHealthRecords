@@ -1,4 +1,5 @@
 const UserAuth = require("../models/UserAuthModel")
+const UserDataModel = require('../models/UserDataModel')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -62,5 +63,17 @@ const login = async(req,res,next)=>{
     return res.status(200).json({status:"Login Successful",tokenid: token})
 }
 
+const getAllPatients = async (req,res)=>{
+    let users
+    
+    try {
+        const users = await UserAuth.find({role:0}).populate("user")
+        // console.log(users);
+        return res.status(200).json(users)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(error)
+    }
+}
 
-module.exports = {register,login}
+module.exports = {register,login,getAllPatients}

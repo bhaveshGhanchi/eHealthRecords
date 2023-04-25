@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {register,login} = require('../controller/UserAuthCont')
+const {register,login,getAllPatients} = require('../controller/UserAuthCont')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -11,6 +11,8 @@ router.post('/register',register)
 
 // routes to POST api to login user. link: http://localhost:{PORT}/user/login
 router.post('/login',login);
+
+router.get('/getAllPatient',getAllPatients)
 
 
 module.exports = router
