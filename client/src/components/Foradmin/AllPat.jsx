@@ -9,6 +9,22 @@ import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import axios from "axios";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute',
+  top: '20%',
+  left: '50%',
+  transform: 'translate(-50%, -20%)',
+  maxWidth: 600,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 
 const AllPat = () => {
@@ -16,8 +32,11 @@ const AllPat = () => {
   const toggle = () => setShow((prevState) => !prevState);
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState([])
-  const [arePat, setArePat] = useState(false)
+  const [userData, setUserData] = useState([]);
+  const [arePat, setArePat] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   async function getPatients() {
     try {
       const response = await axios.get(`http://localhost:8989/UserAuth/getAllPatient`);
@@ -42,7 +61,22 @@ const AllPat = () => {
       <td><div className="sub1" >261409</div></td>
       <td><div className="sub1" >Cold, Cough and FeverCold, Cough and Fever</div></td>
       <td><div className="sub1" >Cancer</div></td>
-      <td><button className="footeDoc" >Appoint</button></td>
+      <td><div>
+      <Button onClick={handleOpen}>Appoint</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">Appointing the Doctor</Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+    </div></td>
     </tr>
     )
   })

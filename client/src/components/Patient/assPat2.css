@@ -242,6 +242,9 @@ h2 {
       width: 100%;
       display: block;
     }
+    .contact-head{
+      display:none;
+    }
     
     td {
       

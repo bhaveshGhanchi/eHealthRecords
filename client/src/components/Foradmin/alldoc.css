@@ -7,6 +7,15 @@
     row-gap: 2rem;
 }
 
+.contactsDoc {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1% 15%;
+  column-gap: 3.3rem;
+  row-gap: 2rem;
+}
+
 .contact-head {
     /* display: flex;
     flex: 0 1 900px;
@@ -223,12 +232,21 @@ h2 {
   td:nth-child(6){
     border-right:none;
   }
+  /* td:nth-child(2){
+    max-width: 100px;
+  } */
 
 
   @media (max-width: 768px) {
+    .contactsDoc{
+      margin:1% 3%;
+    }
     .table-responsive {
       width: 100%;
       overflow-x: scroll;
+    }
+    .td:nth-child(2){
+      max-width:300px;
     }
   }
   
@@ -236,6 +254,9 @@ h2 {
     table {
       width: 100%;
       border-collapse: collapse;
+    }
+    .contact-head{
+      display: none;
     }
     
     th, td {

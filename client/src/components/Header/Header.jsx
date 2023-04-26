@@ -132,12 +132,12 @@ function Header() {
     setOpen(false);
   };
   
-
   const navHead = [
     ["Profile", "Report", "Bills"],
     ["Profile", "Patient List"],
     ["Profile", "Patient List", "Doctors List"],
   ];
+  console.log(navHead,role,auth);
   const navIcon = [
     [
       <AccountBoxIcon />,

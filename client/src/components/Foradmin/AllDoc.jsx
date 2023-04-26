@@ -24,7 +24,7 @@ const AllDoc = () => {
           <CircularProgress />
         ) : (
           <>
-            <div className="contacts">
+            <div className="contactsDoc">
 
                     <table className="table-responsive">
                         <thead>
