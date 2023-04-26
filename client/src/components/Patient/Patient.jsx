@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Patient.css";
 import AddReport from "./AddReport";
 import Header from "../Header/Header";
@@ -36,15 +36,53 @@ const Patient = () => {
     const toggle = () => setShow((prevState) => !prevState);
     const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [userdata,setData] = useState({})
+    const [userdata, setData] = useState({
+        name: "",
+        email: "",
+        phoneno: "",
+        age: 0,
+        gender: "",
+        DOB: "",
+        address: "",
+        maritalStatus: "",
+        employmentStat: "",
+        familyDis: "",
+        riskFac: "",
+        foodAllergy: "",
+        anaphylaxis: "",
+        reports: [],
+        pres: []
+    })
     const id = useParams().id;
 
     async function getUserData() {
+        let dob
         try {
-            const response = await axios.get(`http://localhost:8989/UserData/GetPatientDetails/${id}`);
-            // console.log(response.data);
-            setData(response.data)
-            // console.log(userdata);
+            axios.get(`http://localhost:8989/UserData/GetPatientDetails/${id}`)
+            .then((response)=>{
+                dob = response.data.demographics.DOB.split("T")
+                console.log(response.data);
+                setData({
+                    name: response.data.user.name,
+                    email: response.data.user.email ,
+                    phoneno: response.data.user.phone,
+                    age: response.data.demographics.age,
+                    gender: response.data.demographics.gender,
+                    DOB: dob[0],
+                    address:response.data.demographics.address ,
+                    maritalStatus: response.data.demographics.maritialStatus || "Not known",
+                    employmentStat: response.data.employmentStatus || "Not known",
+                    familyDis: response.data.familyDis || "None",
+                    riskFac: response.data.riskFac || "None",
+                    foodAllergy: response.data.allergies || "None",
+                    anaphylaxis: response.data.anaphy || "None",
+                    reports: response.data.reports,
+                    pres: response.data.pres
+    
+                })
+            })
+            
+            console.log(userdata);
         }
         catch (error) {
             console.log(error);
@@ -54,6 +92,9 @@ const Patient = () => {
         getUserData();
     }, [])
     console.log(userdata);
+
+
+
     return (
         <>
             <Header />
@@ -93,68 +134,62 @@ const Patient = () => {
                                                     <h6>Name:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6></h6>
+                                                    <h6>{userdata.name}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>Email:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>email@something.com</h6>
+                                                    <h6>{userdata.email}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>phone no:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>1234567890</h6>
+                                                    <h6>{userdata.phoneno}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>Age:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>34</h6>
+                                                    <h6>{userdata.age}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>Gender</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>Male</h6>
+                                                    <h6>{userdata.gender}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>DOB:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>23/03/2002</h6>
+                                                    <h6>{userdata.DOB}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>address:</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>
-                                                        Lorem ipsum dolor sit amet consectetur adipisicing
-                                                        elit. Voluptatem atque maiores optio quasi sint
-                                                        exercitationem quas reprehenderit quisquam, maxime
-                                                        possimus, facilis quam ad vel quibusdam mollitia,
-                                                        dolorem facere corporis provident?
+                                                        {userdata.address}
                                                     </h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>maritialStatus</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>No</h6>
+                                                    <h6>{userdata.maritalStatus}</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <h6>employmentStatus</h6>
                                                 </Grid>
                                                 <Grid item xs={6}>
-                                                    <h6>Unemployed</h6>
+                                                    <h6>{userdata.employmentStat}</h6>
                                                 </Grid>
                                             </Grid>
                                         </div>
                                     </Grid>
-                                    {/* <Grid className="imageGrid" xs={0} md={3}>
 
-                    </Grid> */}
                                     <Grid className="gridInner" xs={12} md={12}></Grid>
                                 </Grid>
                             </div>
@@ -185,13 +220,7 @@ const Patient = () => {
                                                         </Grid>
                                                         <Grid item xs={7}>
                                                             <h6>
-                                                                {" "}
-                                                                Lorem ipsum dolor sit amet consectetur,
-                                                                adipisicing elit. Obcaecati sed doloremque odio,
-                                                                sequi, temporibus veritatis iusto adipisci quia
-                                                                eveniet exercitationem tempora. Adipisci animi
-                                                                deleniti sequi quo porro quibusdam corporis
-                                                                facere.
+                                                                {userdata.familyDis}
                                                             </h6>
                                                         </Grid>
                                                         <Grid item xs={5}>
@@ -199,13 +228,7 @@ const Patient = () => {
                                                         </Grid>
                                                         <Grid item xs={7}>
                                                             <h6>
-                                                                {" "}
-                                                                Lorem ipsum dolor sit amet consectetur,
-                                                                adipisicing elit. Obcaecati sed doloremque odio,
-                                                                sequi, temporibus veritatis iusto adipisci quia
-                                                                eveniet exercitationem tempora. Adipisci animi
-                                                                deleniti sequi quo porro quibusdam corporis
-                                                                facere.
+                                                            {userdata.riskFac}
                                                             </h6>
                                                         </Grid>
                                                     </Grid>
@@ -242,13 +265,7 @@ const Patient = () => {
                                                         </Grid>
                                                         <Grid item xs={7}>
                                                             <h6>
-                                                                {" "}
-                                                                Lorem ipsum dolor sit amet consectetur,
-                                                                adipisicing elit. Obcaecati sed doloremque odio,
-                                                                sequi, temporibus veritatis iusto adipisci quia
-                                                                eveniet exercitationem tempora. Adipisci animi
-                                                                deleniti sequi quo porro quibusdam corporis
-                                                                facere.
+                                                                {userdata.foodAllergy}
                                                             </h6>
                                                         </Grid>
                                                         <Grid item xs={5}>
@@ -256,13 +273,7 @@ const Patient = () => {
                                                         </Grid>
                                                         <Grid item xs={7}>
                                                             <h6>
-                                                                {" "}
-                                                                Lorem ipsum dolor sit amet consectetur,
-                                                                adipisicing elit. Obcaecati sed doloremque odio,
-                                                                sequi, temporibus veritatis iusto adipisci quia
-                                                                eveniet exercitationem tempora. Adipisci animi
-                                                                deleniti sequi quo porro quibusdam corporis
-                                                                facere.
+                                                                {userdata.anaphylaxis}
                                                             </h6>
                                                         </Grid>
                                                     </Grid>
@@ -445,9 +456,7 @@ const Patient = () => {
                                                                         </Grid>
                                                                     </div>
                                                                 </Grid>
-                                                                {/* <Grid className="imageGrid" xs={0} md={3}>
 
-                    </Grid> */}
                                                                 <Grid className="gridInner" xs={12} md={12}></Grid>
                                                             </Grid>
                                                         </Typography>
@@ -494,7 +503,7 @@ const Patient = () => {
                                                                 rowSpacing={-4}
                                                                 columnSpacing={-4}
                                                             >
-                                                                <AddReport/>
+                                                                <AddReport />
                                                             </Grid>
                                                         </Typography>
                                                     </AccordionDetails>
@@ -508,9 +517,7 @@ const Patient = () => {
                         ) : (
                             <></>
                         )}
-                        {/* <section id="demographics">
-                
-            </section> */}
+
                     </>
                 )}
             </div>
