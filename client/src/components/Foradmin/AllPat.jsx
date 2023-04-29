@@ -8,6 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -20,7 +30,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -20%)',
   maxWidth: 600,
-  bgcolor: 'background.paper',
+  bgcolor: 'aliceblue',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -34,9 +44,21 @@ const AllPat = () => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState([]);
   const [arePat, setArePat] = useState(false);
+  const navigate=useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    setTimeout(() => {
+      handleClose();
+    }, 1000);
+    
+    navigate('/AllPatient');
+  }
+
   async function getPatients() {
     try {
       const response = await axios.get(`http://localhost:8989/UserAuth/getAllPatient`);
@@ -49,6 +71,22 @@ const AllPat = () => {
       console.log(error);
     }
   }
+  function createData(number, name, spec) {
+    return { number, name, spec };
+   }
+     
+  const rows = [
+    createData(1, "Dr. Harish", "Cancer"),
+    createData(2, "Dr. Harish", "Family Doctor"),
+    createData(3, "Dr. Harish Ramchandran", "Pediatrician"),
+    createData(4, "Dr. Harish", "ENT"),
+    createData(5, "Dr. Harish", "Pediatrician"),
+    createData(6, "Dr. Harish Ramchandran", "Family Doctor"),
+    createData(7, "Dr. Harish", "Family Doctor"),
+    createData(8, "Dr. Harish Ramchandran", "ENT"),
+    createData(9, "Dr. Harish", "Cancer"),
+    createData(10, "Dr. Harish Ramchandran", "ENT")
+   ];
   useEffect(() => {
     getPatients();
   }, [])
@@ -68,11 +106,36 @@ const AllPat = () => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="modalDoc"
       >
-        <Box sx={style}>
+        <Box sx={style} >
           <Typography id="modal-modal-title" variant="h6" component="h2">Appointing the Doctor</Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          <Typography id="modal-modal-search"><div className="search">
+            <input className='search-bar' placeholder="Search Doctor/Specialization" /*onChange={event => setQuery(event.target.value)}*/ />
+            </div></Typography>
+          <Typography id="modal-modal-description" className="modalBody" sx={{ mt: 2 }}>
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow className="Tabroww">
+                    <TableCell>S.No</TableCell>
+                    <TableCell>Doctor's Name</TableCell>
+                    <TableCell>Specialization</TableCell>
+                    <TableCell>Appoint</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow key={row.number} className="Tabrow">
+                      <TableCell component="th" scope="row" className="cell">{row.number}</TableCell>
+                      <TableCell className="cell">{row.name}</TableCell>
+                      <TableCell align="right" className="cell">{row.spec}</TableCell>
+                      <TableCell align="center" className="cell"><IconButton onClick={handleClick}>{isClicked ?<CheckCircleIcon color="primary" /> : <CheckCircleOutlineIcon/>}</IconButton></TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Typography>
         </Box>
       </Modal>

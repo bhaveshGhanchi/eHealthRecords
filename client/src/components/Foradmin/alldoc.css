@@ -235,6 +235,85 @@ h2 {
   /* td:nth-child(2){
     max-width: 100px;
   } */
+  .modalDoc{
+    
+    overflow-y: initial;
+  }
+
+  .search {
+    display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+    padding: 0px 55px;
+    height: 40px;
+    align-items: center;
+    text-align: center;
+    background-color: #E5E5E5;
+    /* box-sizing: border-box; */
+    outline: none;
+    border: 1px solid #181c66;
+    -webkit-transition: 0.5s;
+    transition: 0.3s;
+    margin: 10px auto;
+    font-weight: 200;
+    color: black;
+}
+
+.search-bar:focus {
+    transform: scale(1.1);
+}
+
+
+  .modalCon{
+    background-color: aliceblue;
+  }
+
+  .cell{
+    border-right: 2px solid rgb(157, 157, 158);
+  }
+  
+  .cell:nth-child(4){
+    border-right:none;
+  }
+
+  .Tabroww {
+    background-color: #dfddddc2;
+  }
+
+  .Tabrow {
+    background-color: #dad7d7c2;
+  }
+
+.Tabrow:hover {
+  background-color: #575656;
+}
+
+.Tabrow:hover .cell{
+  color: #fff;
+}
+
+/* .buttonmod {
+  padding: 0.4rem 1rem;
+  border: none;
+  background-color: #3b6efa;
+  color: #fff;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.buttonmod:hover {
+  background-color: #0004d9;
+} */
+
+
+  .modalBody{
+    max-height: 65vh; 
+    overflow-y: auto;
+    background-color: #0000008e;
+  }
 
 
   @media (max-width: 768px) {
