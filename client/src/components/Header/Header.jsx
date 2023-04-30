@@ -150,7 +150,7 @@ function Header() {
   ];
 
   const navlink = [
-    [`/Patient/${userID}`, "#", "#"],
+    [`/Patient/${userID}`, "/PatientReport", "#"],
     ["/doctor", "/Patients"],
     ["#", "/AllPatient", "/AllDoctor"],
   ];

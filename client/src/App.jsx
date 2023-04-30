@@ -9,6 +9,7 @@ import AssignedPat from './components/Patient/PatAssign';
 import Profile from './components/Doctor/Profile';
 import AllDoc from './components/Foradmin/AllDoc';
 import AllPat from './components/Foradmin/AllPat';
+import PatRep from './components/PatientReports/PatRep';
 import { SnackbarProvider } from 'notistack';
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route exact path='/Patients' element={<AssignedPat />} />
           <Route exact path='/AllDoctor' element={<AllDoc />} /> 
           <Route exact path='/AllPatient' element={<AllPat />} /> 
+          <Route exact path='/PatientReport' element={<PatRep />} />
 
           
         </Routes>  
