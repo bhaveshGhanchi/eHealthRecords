@@ -79,9 +79,31 @@ const GetPatientData = (req, res) => {
     }
 }
 
+const AddPres=(req,res)=>{
+    try {
+        const  {id,URL,text} = req.body;
+        console.log(id,URL,text);
+        // res.json({URL:URL})
+        
+        UserDataModel.findOneAndUpdate(
+            {user:id},
+            {$push:{
+                prescription:{
+                    url:URL,
+                    data:text
+                }
+            }}
+        )
+        .then((data)=>{
+            res.json(data);
+
+        })
+    } catch (error) {
+        res.json(data)
+    }
+}
 
 
 
 
-
-module.exports = { registerPatient, GetPatientData };
+module.exports = { registerPatient, GetPatientData,AddPres };

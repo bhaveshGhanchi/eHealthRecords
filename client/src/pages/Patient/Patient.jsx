@@ -85,7 +85,7 @@ const Patient = () => {
                 {loading ? (
                     <CircularProgress />
                 ) : (
-                    aval &&<PatientDetails userdata={userdata} admin={admin} />
+                    aval &&<PatientDetails userdata={userdata} admin={admin} userid={id} />
                 )}
             </div>
         </>
