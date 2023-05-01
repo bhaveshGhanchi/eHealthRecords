@@ -50,8 +50,7 @@ const PatRep = () => {
     const rows=[
         createData(1, "Blood Test"),
         createData(2, "Sugar Test"),
-        createData(3, "Full Body Test"),
-        createData(4, "MRI scan"),
+        createData(3, "MRI scan"),
     ]
 
     // const updateList = function() {
@@ -107,7 +106,7 @@ const PatRep = () => {
                 className="file-item"
                 key={row.number}>
                 <InsertDriveFileIcon/>
-                <p>{row.name}</p>
+                <p className='p'>{row.name}</p>
                 <div className="actions">
                 <IconButton onClick={handleClick}>{isClicked ?<DeleteIcon color="primary" /> : <DeleteOutlinedIcon/>}</IconButton>
                 </div>
