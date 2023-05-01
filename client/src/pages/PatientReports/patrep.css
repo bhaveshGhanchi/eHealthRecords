@@ -122,19 +122,19 @@
     margin:auto;
 }
 
-li {
+/* li {
     list-style: none;
     margin: 0.5em 0;
     background-color: #1100ff38;
     border-radius: 5px;
     display: flex;
-    /* align-items: center; */
+   
     padding: 0.6em 1.5em;
     padding-bottom: 0;
 
-}
+} */
 
-    p {
+    /* p {
         flex: 1;
         font-size: 1.1rem;
         margin-left: 0.6rem;
@@ -143,7 +143,7 @@ li {
     .actions {
         justify-self: flex-end;
         cursor: pointer;
-    }
+    } */
 
 
 /* .form__input::-webkit-inner-spin-button,

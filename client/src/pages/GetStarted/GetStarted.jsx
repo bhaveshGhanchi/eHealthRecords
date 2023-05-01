@@ -41,7 +41,7 @@ const GetStarted = (props) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showFirstPassword, setShowFirstPassword] = React.useState(false);
     const [showConfPassword, setShowConfPassword] = React.useState(false);
-
+    const [modalOpen,setModalOpen]= useState(props.isModalOpen)
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
@@ -115,7 +115,9 @@ const GetStarted = (props) => {
                 localStorage.clear()
                 localStorage.setItem('token', data.tokenid);
                 enqueueSnackbar("Successful login", { autoHideDuration: 3000, variant: 'success' });
+                setModalOpen(false)
                 navigate('/')
+
             }
             else {
 
@@ -167,6 +169,7 @@ const GetStarted = (props) => {
             sg="xl"
             isOpen={props.isModalOpen}
             toggle={props.toggleModal}
+            
         >
 
             <ModalBody>

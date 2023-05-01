@@ -26,54 +26,7 @@ const registerPatient = async (req, res, next) => {
         if (user) {
             return res.status(500).json({ message: "User already registered" })
         }
-        if (files) {
-
-            await files.forEach(async element => {
-                if (element.fieldname === "displayPic") {
-                    const dateTime = giveCurrentDateTime();
-
-                    const storageRef = ref(storage, `files/${userid}/${"Dp" + "-" + userid + "_" + dateTime}`);
-
-                    // Create file metadata including the content type
-                    const metadata = {
-                        contentType: element.mimetype,
-                        info: "User Display Picture"
-                    };
-                    const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
-                    //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-
-                    // Grab the public url
-                    let URL = await getDownloadURL(snapshot.ref);
-                    dpData = {
-                        path: URL,
-                        metadata: metadata
-                    }
-                }
-                else if (element.fieldname === "records") {
-                    const dateTime = giveCurrentDateTime();
-
-                    const storageRef = ref(storage, `files/${userid}/${"Record" + "-" + userid + "_" + dateTime}`);
-
-                    // Create file metadata including the content type
-                    const metadata = {
-                        contentType: element.mimetype,
-                        info: "User medical records"
-                    };
-                    const snapshot = await uploadBytesResumable(storageRef, element.buffer, metadata);
-                    //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-
-                    // Grab the public url
-                    let recordURL = await getDownloadURL(snapshot.ref);
-                    let Data = {
-                        path: recordURL,
-                        metadata: metadata
-                    }
-                    medRec.push(Data)
-                }
-
-                // console.log(dpData,medRec);
-            })
-        }
+        
         const BMI = parseInt(weight / (height * height))
         const userData = new UserDataModel({
             demographics:{
