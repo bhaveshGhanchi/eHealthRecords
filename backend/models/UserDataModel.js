@@ -4,60 +4,54 @@ const Schema = mongoose.Schema;
 
 //Creating User Schema 
 const UserDataModel = new Schema({
+    adminDetails:{
+        DisplayPic:String,
+        name:String,
+        contact:String,
+        emergencyContactName:String,
+        emergencyContactNumber:String,
+        DOB:Date,
+        insurance:String,
+        address:String
+    },
+
     demographics:{
-        DisplayPic: {
-            type: Object
+        age:Number,
+        gender: { type: String},
+        maritialStatus: {
+            type: String
         },
-        DOB: {
-            type: Date
-        },
-        gender: { type: String, require: true },
-        address: { type: String, require: true },
-        emergencyContactName: { type: String, require: true },
-        emergencyContactNumber: { type: String, require: true },
+
+        age: {
+            type: Number
+        }
+    },
+    vitalSigns:{
         height: {
             type: Number
         },
         weight: {
             type: Number
         },
-        maritialStatus: {
-            type: String
-        },
-        age: {
-            type: Number
-        }
+        bloodPressure:String
+        
     },
-    
-    insuranceDetails: { type: String },
+    history:{
+        medicalHistory:String,
+        FamilyHistory:String,
+        addiction:String,
+        allergy:String
+    },
+    reports:[{}],
+    bills:[{}],
+    prescription:[{}],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserAuth",
         required: true
     },
     
-    medicalHistory: {
-        type: String
-    },
-    allergies: {
-        type: String
-    },
-    employmentStatus: {
-        type: String
-    },
     
-    reports:[{
-        url:String,
-        details:{
-            Haemoglobin:Number,
-            RBC: Number,
-            PCV: Number,
-            MCV:Number,
-            MCH: Number,
-
-        }
-
-    }]
 });
 
 module.exports = mongoose.model("UserData", UserDataModel);

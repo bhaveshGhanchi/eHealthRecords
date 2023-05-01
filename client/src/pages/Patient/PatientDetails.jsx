@@ -38,7 +38,7 @@ const PatientDetails = (props) => {
     const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(false);
     const [available, setAval] = useState(true)
-    const handleOpen = () =>{
+    const handleOpen = () => {
         setOpen(true);
         // console.log(open);
     };
@@ -78,6 +78,41 @@ const PatientDetails = (props) => {
     //     pres: userinfo.prescription,
     //     bills: userinfo.bills
     // })
+    console.log(userinfo.prescription);
+    const PrescriptionAccor = userinfo.prescription.map((data, index) => {
+        console.log(data, index);
+        return (
+            <>
+                <Accordion expanded={expandedPres === `panel${index + 1}`} onChange={handleChangePres(`panel${index + 1}`)}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1bh-content"
+                        id="panel1bh-header"
+                    >
+                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                            <Link href={data.url} color="inherit" underline="hover">
+                                Add Prescription_file1
+                            </Link>
+
+                        </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                            <Grid
+                                container
+                                spacing={4}
+                                rowSpacing={-4}
+                                columnSpacing={-4}
+                            >
+                                {data.data}
+                            </Grid>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </>
+        )
+    })
+
 
     return (
         <>
@@ -112,7 +147,7 @@ const PatientDetails = (props) => {
                                         <h6>Name:</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>{userinfo.adminDetails.name }</h6>
+                                        <h6>{userinfo.adminDetails.name}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>Email:</h6>
@@ -452,47 +487,22 @@ const PatientDetails = (props) => {
                             >
                                 <Typography sx={{ width: '33%', flexShrink: 0 }}>
                                     Prescriptions
-                                    
+
                                 </Typography>
                                 {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                             </AccordionSummary>
-                                    <div className="addDiv" onClick={handleOpen} >Add Prescription</div>
+                            <div className="addDiv" onClick={handleOpen} >Add Prescription</div>
                             <AccordionDetails>
                                 <Typography>
                                     {/* Inner Accordation */}
                                     {/* pannel 1 */}
-                                    <Accordion expanded={expandedPres === 'panel1'} onChange={handleChangePres('panel1')}>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1bh-content"
-                                            id="panel1bh-header"
-                                        >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                                <Link href="#" color="inherit" underline="hover">
-                                                    Add Prescription_file1
-                                                </Link>
-
-                                            </Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Typography>
-                                                <Grid
-                                                    container
-                                                    spacing={4}
-                                                    rowSpacing={-4}
-                                                    columnSpacing={-4}
-                                                >
-                                                    
-                                                </Grid>
-                                            </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
+                                    {PrescriptionAccor}
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
 
                     </section>
-                    <AddReport isModelOpen={open} setOpen={setOpen}/>
+                    <AddReport userid={props.userid} isModelOpen={open} setOpen={setOpen} />
                 </>
             ) : (
                 <></>
