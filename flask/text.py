@@ -17,4 +17,6 @@ df = pd.DataFrame(data)
 
 prescriptions=df['prescription']
 lst=prescriptions.iloc[0]
+
 print(lst[0].get('data'))
+
