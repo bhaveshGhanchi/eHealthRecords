@@ -53,6 +53,9 @@ const Patient = () => {
                         // console.log(response.data);
                         let userinfo = response.data
                         setData({ userinfo })
+                        if(response.data.user.role==2){
+                            setAdmin(true)
+                        }
 
 
                     }

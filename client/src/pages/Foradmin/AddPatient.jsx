@@ -221,7 +221,7 @@ console.log(DOB.format('YYYY-MM-DDThh:mm:ss.sssZ'));
               {/* <TextField sx={textStyle} onChange={(e) => { handleChange(e) }} value={DOB}  label="DOB" variant="outlined" /> */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']}>
-                  <DatePicker
+                  <DatePicker sx={textStyle}
                   id = "dob"
                   value={DOB}
                   onChange={(newValue) => setDOB(newValue)}
@@ -234,7 +234,7 @@ console.log(DOB.format('YYYY-MM-DDThh:mm:ss.sssZ'));
               <TextField sx={textStyle} onChange={(e) => { handleChange(e) }} value={age} id="age" label="age" variant="outlined" />
               <TextField sx={textStyle} onChange={(e) => { handleChange(e) }} value={gender} id="gender" label="gender" variant="outlined" />
               <TextField sx={textStyle} onChange={(e) => { handleChange(e) }} value={maritalStatus} id="marStat" label="marital status" variant="outlined" />
-              <Button variant="contained" onClick={handleClick} >Contained</Button>
+              <Button variant="contained" onClick={handleClick} >Submit</Button>
             </Box>
 
           </>

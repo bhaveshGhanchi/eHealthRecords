@@ -16,6 +16,7 @@ import AddReport from "../Partial/AddReport";
 import AddBill from "../Partial/AddBill";
 const PatientDetails = (props) => {
     const userinfo = props.userdata.userinfo
+    const admin = props.admin
     console.log(userinfo);
     const [expanded, setExpanded] = React.useState(false);
 
@@ -38,7 +39,6 @@ const PatientDetails = (props) => {
     const [open, setOpen] = React.useState(false);
     const [show, setShow] = useState(false);
     const toggle = () => setShow((prevState) => !prevState);
-    const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(false);
     const [available, setAval] = useState(true)
     const [openBill, setOpenBill] = React.useState(false);
@@ -413,6 +413,22 @@ const PatientDetails = (props) => {
                                             <Grid item xs={7}>
                                                 <h6>
                                                     {userinfo.vitalSigns.weight} kgs
+                                                </h6>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <h6>Blood Pressure:</h6>
+                                            </Grid>
+                                            <Grid item xs={7}>
+                                                <h6>
+                                                    {userinfo.vitalSigns.bloodPressure}
+                                                </h6>
+                                            </Grid>
+                                            <Grid item xs={5}>
+                                                <h6>BMI:</h6>
+                                            </Grid>
+                                            <Grid item xs={7}>
+                                                <h6>
+                                                    {(10000*userinfo.vitalSigns.weight)/(userinfo.vitalSigns.height*userinfo.vitalSigns.height)}
                                                 </h6>
                                             </Grid>
                                         </Grid>
