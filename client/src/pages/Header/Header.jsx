@@ -131,17 +131,17 @@ function Header() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
+
   const navHead = [
     ["Profile", "Report", "Bills"],
     ["Profile", "Patient List"],
-    ["Profile", "Patient List", "Doctors List"],
+    ["Add Patient", "Patient List", "Doctors List"],
   ];
-  console.log(navHead,role,auth);
+  console.log(navHead, role, auth);
   const navIcon = [
     [
       <AccountBoxIcon />,
-      
+
       <SummarizeIcon />,
       <ReceiptLongIcon />,
     ],
@@ -152,9 +152,9 @@ function Header() {
   const navlink = [
     [`/Patient/${userID}`, "/PatientReport", "#"],
     ["/doctor", "/Patients"],
-    ["#", "/AllPatient", "/AllDoctor"],
+    ["/AddPatient", "/AllPatient", "/AllDoctor"],
   ];
-// console.log(navlink[role]);
+  // console.log(navlink[role]);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -164,7 +164,7 @@ function Header() {
         open={open}
       >
         <Toolbar>
-          <IconButton
+          {auth && <IconButton
             onClick={handleDrawerOpen}
             size="large"
             edge="start"
@@ -173,7 +173,7 @@ function Header() {
             sx={{ mr: 2, ...(open && { display: "none" }) }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton>}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             EHR
           </Typography>
@@ -249,23 +249,23 @@ function Header() {
         </DrawerHeader>
         <Divider />
         <List></List>
-{auth && 
-        <List>
-          {navHead[role].map((text, index) => (
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>{navIcon[role][index]}</ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  onClick={() => {
-                    navigate(navlink[role][index]);
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-}
+        {auth &&
+          <List>
+            {navHead[role].map((text, index) => (
+              <ListItem>
+                <ListItemButton>
+                  <ListItemIcon>{navIcon[role][index]}</ListItemIcon>
+                  <ListItemText
+                    primary={text}
+                    onClick={() => {
+                      navigate(navlink[role][index]);
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        }
         {/* <List>
         <ListItem>
             <ListItemButton>

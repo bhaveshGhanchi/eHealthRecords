@@ -67,7 +67,19 @@ const getAllPatients = async (req,res)=>{
     let users
     
     try {
-        const users = await UserAuth.find({role:0}).populate("user")
+        const users = await UserAuth.find({role:0, user : { $exists : true }}).populate("user")
+        // console.log(users);
+        return res.status(200).json(users)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json(error)
+    }
+}
+const getUnregPatients = async (req,res)=>{
+    let users
+    
+    try {
+        const users = await UserAuth.find({ user : { $exists : false },role:0})
         // console.log(users);
         return res.status(200).json(users)
     } catch (error) {
@@ -76,4 +88,4 @@ const getAllPatients = async (req,res)=>{
     }
 }
 
-module.exports = {register,login,getAllPatients}
+module.exports = {register,login,getAllPatients,getUnregPatients}

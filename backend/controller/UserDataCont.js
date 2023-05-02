@@ -103,7 +103,32 @@ const AddPres=(req,res)=>{
     }
 }
 
+const AddBill=(req,res)=>{
+    try {
+        const  {id,title,cost,desc,date} = req.body;
+        console.log(id,title,cost,desc,date);
+        // res.json({URL:URL})
+        
+        UserDataModel.findOneAndUpdate(
+            {user:id},
+            {$push:{
+                bills:{
+                    title:title,
+                    cost:cost,
+                    description:desc,
+                    date:date
+                }
+            }}
+        )
+        .then((data)=>{
+            res.json(data);
+            console.log(data);
+        })
+    } catch (error) {
+        res.json(err)
+    }
+}
 
 
 
-module.exports = { registerPatient, GetPatientData,AddPres };
+module.exports = { registerPatient, GetPatientData,AddPres,AddBill };

@@ -40,7 +40,7 @@ const Patient = () => {
     const [aval, setAval] = useState(false)
     const [userdata, setData] = useState({})
     const id = useParams().id;
-
+// console.log(id)
     async function getUserData() {
         let dob
         try {

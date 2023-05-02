@@ -116,7 +116,7 @@ export default function AddReport(props) {
                         Upload
                         <input id="image"
                             name="file"
-                            ref={image} onChange={(e) => handleUpload(e)} multiple type="file" />
+                            ref={image} onChange={(e) => handleUpload(e)} type="file" />
                     </Button>
                     <Button onClick={handleSubmit} variant="contained" endIcon={<SendIcon />}>
                         Send

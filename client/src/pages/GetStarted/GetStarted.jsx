@@ -46,7 +46,7 @@ const GetStarted = (props) => {
         event.preventDefault();
     };
     const [loading, setLoading] = useState(false);
-
+    const handleClose = () => props.setShow(false);
     const handleRegClick = async() => {
         console.log(email, pass);
         if (firstPass !== confPass) {
@@ -68,7 +68,7 @@ const GetStarted = (props) => {
                     'Content-Type': 'application/json'
                 }
             })
-            const data = await response.data
+            const data = await response.data;
             console.log(response)
             if (data.tokenid) {
                 localStorage.clear()
@@ -91,7 +91,7 @@ const GetStarted = (props) => {
         }
 
         setLoading(false)
-
+        handleClose()
     }
 
     const handleLoginClick = async () => {
@@ -134,6 +134,7 @@ const GetStarted = (props) => {
             enqueueSnackbar(mess, { variant: 'error' });
         }
         setLoading(false)
+        handleClose()
 
     }
     const handleInputChange = (e) => {
@@ -169,6 +170,7 @@ const GetStarted = (props) => {
             sg="xl"
             isOpen={props.isModalOpen}
             toggle={props.toggleModal}
+            onClose={handleClose}
             
         >
 
