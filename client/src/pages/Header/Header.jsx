@@ -135,7 +135,7 @@ function Header() {
   const navHead = [
     ["Profile", "Report", "Bills"],
     ["Profile", "Patient List"],
-    ["Add Patient", "Patient List", "Doctors List"],
+    ["Add Patient", "Patient List", "Add Doctor", "Doctors List"],
   ];
   console.log(navHead, role, auth);
   const navIcon = [
@@ -146,13 +146,13 @@ function Header() {
       <ReceiptLongIcon />,
     ],
     [<AccountBoxIcon />, <AccountBoxIcon />],
-    [<AccountBoxIcon />, <AccountBoxIcon />, <AccountBoxIcon />],
+    [<AccountBoxIcon />, <AccountBoxIcon />,<AccountBoxIcon />, <AccountBoxIcon />],
   ];
 
   const navlink = [
     [`/Patient/${userID}`, "/PatientReport", "#"],
-    ["/doctor", "/Patients"],
-    ["/AddPatient", "/AllPatient", "/AllDoctor"],
+    [`/doctor/${userID}`, "/Patients"],
+    ["/AddPatient", "/AllPatient","/AddDoctor", "/AllDoctor"],
   ];
   // console.log(navlink[role]);
   return (
@@ -204,8 +204,7 @@ function Header() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                
                 <MenuItem onClick={logout}>Log out</MenuItem>
               </Menu>
             </div>

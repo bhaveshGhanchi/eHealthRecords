@@ -30,6 +30,10 @@ const UserAuthModel = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "UserData",
         
+    },
+    doctor:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "DoctorData"
     }
 });
 

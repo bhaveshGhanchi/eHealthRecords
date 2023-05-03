@@ -20,6 +20,7 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
+import AddDoctor from './pages/Foradmin/AddDoctor';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -36,13 +37,14 @@ function App() {
                 <Routes>
                   <Route exact path='/' element={<Home />} />
                   <Route exact path='/Patient/:id' element={<Patient />} />
-                  <Route exact path='/Doctor' element={<Profile />} />
+                  <Route exact path='/Doctor/:id' element={<Profile />} />
                   <Route exact path='/Patients' element={<AssignedPat />} />
                   <Route exact path='/AllDoctor' element={<AllDoc />} />
                   <Route exact path='/AllPatient' element={<AllPat />} />
                   <Route exact path='/PatientReport' element={<PatRep />} />
                   <Route exact path='/Dashboard' element={<DashboardAppPage/>} />
                   <Route exact path='/addPatient' element={<AddPatient/>} />
+                  <Route exact path='/addDoctor' element={<AddDoctor/>} />
 
                 </Routes>
               </ThemeProvider>

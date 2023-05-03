@@ -71,24 +71,27 @@ const AllPat = () => {
       console.log(error);
     }
   }
-  function createData(number, name, spec) {
-    return { number, name, spec };
-   }
+  
+   const [docData, setDocData] = useState([])
+  
+  async function getDoctors() {
+    try {
+      const response = await axios.get(`http://localhost:8989/Admin/getDoctors`);
+      console.log(response.data);
+      setDocData(response.data)
+
+      // console.log(userdata);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  
      
-  const rows = [
-    createData(1, "Dr. Harish", "Cancer"),
-    createData(2, "Dr. Harish", "Family Doctor"),
-    createData(3, "Dr. Harish Ramchandran", "Pediatrician"),
-    createData(4, "Dr. Harish", "ENT"),
-    createData(5, "Dr. Harish", "Pediatrician"),
-    createData(6, "Dr. Harish Ramchandran", "Family Doctor"),
-    createData(7, "Dr. Harish", "Family Doctor"),
-    createData(8, "Dr. Harish Ramchandran", "ENT"),
-    createData(9, "Dr. Harish", "Cancer"),
-    createData(10, "Dr. Harish Ramchandran", "ENT")
-   ];
+  
   useEffect(() => {
     getPatients();
+    getDoctors();
   }, [])
 
   const PatientElement = userData.map(data => {
@@ -125,11 +128,11 @@ const AllPat = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {docData.map((row) => (
                     <TableRow key={row.number} className="Tabrow">
                       <TableCell component="th" scope="row" className="cell">{row.number}</TableCell>
                       <TableCell className="cell">{row.name}</TableCell>
-                      <TableCell align="right" className="cell">{row.spec}</TableCell>
+                      <TableCell align="right" className="cell">{row.doctor.generalData.Specialization}</TableCell>
                       <TableCell align="center" className="cell"><IconButton onClick={handleClick}>{isClicked ?<CheckCircleIcon color="primary" /> : <CheckCircleOutlineIcon/>}</IconButton></TableCell>
                     </TableRow>
                   ))}

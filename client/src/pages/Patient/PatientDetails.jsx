@@ -306,7 +306,8 @@ const PatientDetails = (props) => {
                         </Typography>
                         {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                     </AccordionSummary>
-                    <div className="addDiv" onClick={handleOpenBill} >Add Bill</div>
+                    {/* <div className="addDiv" onClick={handleOpenBill} >Add Bill</div> */}
+                    <Button onClick={handleOpenBill}>Add Bill</Button>
 
                     <AccordionDetails>
                         <Typography>
@@ -428,7 +429,7 @@ const PatientDetails = (props) => {
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
-                                                    {(10000*userinfo.vitalSigns.weight)/(userinfo.vitalSigns.height*userinfo.vitalSigns.height)}
+                                                    {((10000*userinfo.vitalSigns.weight)/(userinfo.vitalSigns.height*userinfo.vitalSigns.height)).toFixed(2)}
                                                 </h6>
                                             </Grid>
                                         </Grid>

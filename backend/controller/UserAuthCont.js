@@ -75,6 +75,8 @@ const getAllPatients = async (req,res)=>{
         return res.status(500).json(error)
     }
 }
+
+
 const getUnregPatients = async (req,res)=>{
     let users
     
