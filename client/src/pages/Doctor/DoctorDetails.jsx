@@ -74,7 +74,7 @@ const DoctorDetails = (props) => {
         <>
             <section className="demographics">
                 <div className="divHead">
-                    <h4>General Information</h4>
+                    <h3>General Information</h3>
                     <Divider orientation="vertical" flexItem />
                 </div>
                 <div className="gridOuter">
@@ -156,7 +156,7 @@ const DoctorDetails = (props) => {
 
             <section className="demographics">
                 <div className="divHead">
-                    <h4>Education</h4>
+                    <h3>Education</h3>
                     <Divider orientation="vertical" flexItem />
                 </div>
                 <div className="gridOuter">
@@ -187,7 +187,7 @@ const DoctorDetails = (props) => {
 
             <section className="demographics">
                 <div className="divHead">
-                    <h4>Work Experience</h4>
+                    <h3>Work Experience</h3>
                     <Divider orientation="vertical" flexItem />
                 </div>
                 <div className="gridOuter">

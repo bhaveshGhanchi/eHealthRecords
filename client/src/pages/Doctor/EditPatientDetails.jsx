@@ -93,7 +93,7 @@ const EditPatientDetails = (props) => {
         <>
             <section className="demographics">
                 <div className="divHead">
-                    <h4>General Information</h4>
+                    <h3>General Information</h3>
                     <Divider orientation="vertical" flexItem />
                 </div>
                 <div className="gridOuter">
@@ -194,7 +194,7 @@ const EditPatientDetails = (props) => {
                 <>
                     <section className="demographics">
                         <div className="divHead">
-                            <h4>History</h4>
+                            <h3>History</h3>
                             <Divider orientation="vertical" flexItem />
                         </div>
                         <div className="gridOuter">
@@ -236,7 +236,7 @@ const EditPatientDetails = (props) => {
                     </section>
                     <section className="demographics">
                         <div className="divHead">
-                            <h4>Vital Signs</h4>
+                            <h3>Vital Signs</h3>
                             <Divider orientation="vertical" flexItem />
                         </div>
                         <div className="gridOuter">
