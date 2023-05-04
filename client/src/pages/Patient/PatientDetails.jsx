@@ -17,7 +17,7 @@ import AddBill from "../Partial/AddBill";
 const PatientDetails = (props) => {
     const userinfo = props.userdata.userinfo
     const admin = props.admin
-    console.log(userinfo);
+
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -46,7 +46,7 @@ const PatientDetails = (props) => {
     const handleCloseBill = () => setOpenBill(false);
     const handleOpen = () => {
         setOpen(true);
-        // console.log(open);
+
     };
 
     const handleClose = () => setOpen(false);
@@ -67,28 +67,111 @@ const PatientDetails = (props) => {
         reports: [],
         pres: []
     })
-    console.log(userinfo);
-    // setData({
-    //     name: userinfo.adminDetails.name,
-    //     email: userinfo.user.email,
-    //     phoneno: userinfo.adminDetails.contact,
-    //     age: userinfo.demographics.age,
-    //     gender: userinfo.demographics.gender,
-    //     DOB: userinfo.adminDetails.DOB,
-    //     address: userinfo.adminDetails.address,
-    //     maritalStatus: userinfo.demographics.maritialStatus || "Not known",
-    //     // employmentStat: response.data.employmentStatus || "Not known",
-    //     medicalHistory: userinfo.history.medicalHistory || "None",
-    //     familyDis: userinfo.history.FamilyHistory || "None",
-    //     addiction: userinfo.history.addiction || "",
-    //     allergy: userinfo.history.allergy || "None",
-    //     reports: userinfo.reports,
-    //     pres: userinfo.prescription,
-    //     bills: userinfo.bills
-    // })
-    console.log(userinfo);
+
+    // console.log(userinfo);
+    const ReportsAccor = userinfo.reports.map(data => {
+        const keys = Object.keys(data.reportAbnormalities)
+        const val = Object.values(data.reportAbnormalities)
+        console.log(keys, val);
+        return (<>
+            <Accordion expanded={expandedReports === 'panel1'} onChange={handleChangeReports('panel1')}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                >
+                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                        <Link href="#" color="inherit" underline="hover">
+                            Report_name
+                        </Link>
+
+                    </Typography>
+
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        <Grid
+                            container
+                            spacing={4}
+                            rowSpacing={-4}
+                            columnSpacing={-4}
+                        >
+                            <Grid className="gridInner" xs={12}>
+                                <div className="innerGridDetails">
+                                    <Grid
+                                        container
+                                        rowSpacing={1}
+                                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                                    >
+                                        <Grid item xs={5}>
+                                            <h6>haemoglobin:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.haemoglobin}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>RBC:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.RBC}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>WBC:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.WBC}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>platelet:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.platelet}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>cholesterol:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.cholesterol}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>glucose:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.glucoseFasting}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>vitB12:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.vitB12}</h6>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <h6>vitD:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{data.vitD}</h6>
+                                        </Grid>
+
+                                        <Grid item xs={5}>
+                                            <h6>Report Abnormalities:</h6>
+                                        </Grid>
+                                        <Grid item xs={7}>
+                                            <h6>{JSON.stringify(data.reportAbnormalities)}</h6>
+                                        </Grid>
+                                    </Grid>
+                                </div>
+                            </Grid>
+
+                            <Grid className="gridInner" xs={12} md={12}></Grid>
+                        </Grid>
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+        </>)
+    })
+
     const PrescriptionAccor = userinfo.prescription.map((data, index) => {
-        console.log(data, index);
+
         return (
             <>
                 <Accordion expanded={expandedPres === `panel${index + 1}`} onChange={handleChangePres(`panel${index + 1}`)}>
@@ -120,10 +203,10 @@ const PatientDetails = (props) => {
             </>
         )
     })
-    console.log(userinfo.bills);
+
     const UserBills = userinfo.bills.map((data, index) => {
         return (<>
-            <Accordion expanded={expandedBills === `panel${index+1}`} onChange={handleChangeBills(`panel${index+1}`)}>
+            <Accordion expanded={expandedBills === `panel${index + 1}`} onChange={handleChangeBills(`panel${index + 1}`)}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
@@ -176,7 +259,7 @@ const PatientDetails = (props) => {
                                         <Grid item xs={7}>
                                             <h6>{data.description}</h6>
                                         </Grid>
-                                        
+
 
                                     </Grid>
                                 </div>
@@ -200,7 +283,7 @@ const PatientDetails = (props) => {
                         <Grid className="gridInner" xs={12} md={6}>
                             <Avatar
                                 sx={{ height: "120px", width: "120px" }}
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1sN3YPsrO9N4ec3bOLVPn3OouZdGQL2NTZA&usqp=CAU"
+                                src=""
 
                             />
                         </Grid>
@@ -307,7 +390,7 @@ const PatientDetails = (props) => {
                         {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                     </AccordionSummary>
                     {/* <div className="addDiv" onClick={handleOpenBill} >Add Bill</div> */}
-                    <Button onClick={handleOpenBill}>Add Bill</Button>
+                    {admin && <Button onClick={handleOpenBill}>Add Bill</Button>}
 
                     <AccordionDetails>
                         <Typography>
@@ -429,7 +512,7 @@ const PatientDetails = (props) => {
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
-                                                    {((10000*userinfo.vitalSigns.weight)/(userinfo.vitalSigns.height*userinfo.vitalSigns.height)).toFixed(2)}
+                                                    {((10000 * userinfo.vitalSigns.weight) / (userinfo.vitalSigns.height * userinfo.vitalSigns.height)).toFixed(2)}
                                                 </h6>
                                             </Grid>
                                         </Grid>
@@ -456,92 +539,7 @@ const PatientDetails = (props) => {
                             <AccordionDetails>
                                 <Typography>
                                     {/* Inner Accordation */}
-                                    <Accordion expanded={expandedReports === 'panel1'} onChange={handleChangeReports('panel1')}>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1bh-content"
-                                            id="panel1bh-header"
-                                        >
-                                            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                                <Link href="#" color="inherit" underline="hover">
-                                                    Report_name
-                                                </Link>
-
-                                            </Typography>
-
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            <Typography>
-                                                <Grid
-                                                    container
-                                                    spacing={4}
-                                                    rowSpacing={-4}
-                                                    columnSpacing={-4}
-                                                >
-                                                    <Grid className="gridInner" xs={12}>
-                                                        <div className="innerGridDetails">
-                                                            <Grid
-                                                                container
-                                                                rowSpacing={1}
-                                                                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                                                            >
-                                                                <Grid item xs={5}>
-                                                                    <h6>haemoglobin:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>haemoglobin</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>RBC:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>WBC:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>platelet:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>ESR:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>glucose:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>cholesterol:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                                <Grid item xs={5}>
-                                                                    <h6>thyroid:</h6>
-                                                                </Grid>
-                                                                <Grid item xs={7}>
-                                                                    <h6>12.5</h6>
-                                                                </Grid>
-                                                            </Grid>
-                                                        </div>
-                                                    </Grid>
-
-                                                    <Grid className="gridInner" xs={12} md={12}></Grid>
-                                                </Grid>
-                                            </Typography>
-                                        </AccordionDetails>
-                                    </Accordion>
+                                    {ReportsAccor}
                                 </Typography>
                             </AccordionDetails>
                         </Accordion>
@@ -558,7 +556,8 @@ const PatientDetails = (props) => {
                                 </Typography>
                                 {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                             </AccordionSummary>
-                            <div className="addDiv" onClick={handleOpen} >Add Prescription</div>
+
+                            <Button onClick={handleOpen}>Add Prescription</Button>
                             <AccordionDetails>
                                 <Typography>
                                     {/* Inner Accordation */}
@@ -569,12 +568,12 @@ const PatientDetails = (props) => {
                         </Accordion>
 
                     </section>
-                    <AddReport userid={props.userid} isModelOpen={open} setOpen={setOpen} />
-                    <AddBill userid={props.userid} BillModal={openBill} setOpen={setOpenBill} />
                 </>
             ) : (
                 <></>
             )}
+            <AddReport userid={props.userid} isModelOpen={open} setOpen={setOpen} />
+            <AddBill userid={props.userid} BillModal={openBill} setOpen={setOpenBill} />
 
         </>
     )

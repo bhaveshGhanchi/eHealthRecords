@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./doctor.css";
 import doctor1 from './../../assets/pat1.jpg';
 import Header from "../Header/Header";
@@ -14,8 +14,26 @@ const AssignedPat = () => {
   const toggle = () => setShow((prevState) => !prevState);
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
-  const id = useParams().id;
-  console.log(id);
+  const [patientData,setData] = useState({});
+  // const id = useParams().id;
+  // console.log(id);
+  async function getPatients() {
+    try {
+      const response = await axios.get(`http://localhost:8989/UserAuth/getAllPatient`);
+
+      setData(response.data)
+      
+      console.log(patientData);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    // setLoading(true)
+    getPatients();
+    // setLoading(false)
+}, [])
   return (
     <>
       <Header />

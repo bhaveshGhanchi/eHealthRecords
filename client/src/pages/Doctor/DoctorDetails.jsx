@@ -209,9 +209,7 @@ const DoctorDetails = (props) => {
                                 </Grid>
                             </div>
                         </Grid>
-                        {/* <Grid className="imageGrid" xs={0} md={3}>
-
-                    </Grid> */}
+                        
                         <Grid className="gridInner" xs={12} md={12}></Grid>
                     </Grid>
                 </div>

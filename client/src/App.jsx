@@ -13,6 +13,8 @@ import PatRep from './pages/PatientReports/PatRep';
 import { SnackbarProvider } from 'notistack';
 import { HelmetProvider } from 'react-helmet-async';
 import AddPatient from './pages/Foradmin/AddPatient';
+import ReportPg from './pages/Patient/ReportPg';
+import EditPatient from './pages/Doctor/EditPatient';
 // routes
 import DashboardAppPage from './pages/Dashboard/Dashboard';
 // theme
@@ -45,6 +47,7 @@ function App() {
                   <Route exact path='/Dashboard' element={<DashboardAppPage/>} />
                   <Route exact path='/addPatient' element={<AddPatient/>} />
                   <Route exact path='/addDoctor' element={<AddDoctor/>} />
+                  <Route exact path='/editPatient/:id' element={<EditPatient/>} />
 
                 </Routes>
               </ThemeProvider>

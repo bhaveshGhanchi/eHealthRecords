@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Patient.css";
-import AddReport from "./AddReport";
+
+
 import Header from "../Header/Header";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -19,29 +19,16 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 // import { set } from "mongoose";
 
-const Patient = () => {
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-    const [expandedReports, setExpandedReports] = React.useState(false);
-
-    const handleChangeReports = (panel) => (event, isExpanded) => {
-        setExpandedReports(isExpanded ? panel : false);
-    };
-    const [expandedPres, setExpandedPres] = React.useState(false);
-
-    const handleChangePres = (panel) => (event, isExpanded) => {
-        setExpandedPres(isExpanded ? panel : false);
-    };
+const ReportPg = () => {
+    
+    
     const [show, setShow] = useState(false);
     const toggle = () => setShow((prevState) => !prevState);
     const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(false);
     const [aval, setAval] = useState(false)
     const [userdata, setData] = useState({})
-    const id = useParams().id;
+    const [id,setID] = useState()
     const navigate = useNavigate()
 
 useEffect(() => {
@@ -53,7 +40,7 @@ useEffect(() => {
         localStorage.removeItem("token");
         navigate("/login");
     } else {
-          console.log(localData,"final");
+          setID(localData.user._id)
         if(localData.user.role===2){
 
             setAdmin(true)
@@ -63,7 +50,7 @@ useEffect(() => {
     }
   }, []);
     async function getUserData() {
-        let dob
+        
         try {
             axios.get(`http://localhost:8989/UserData/GetPatientDetails/${id}`)
                 .then((response) => {
@@ -74,9 +61,7 @@ useEffect(() => {
                         // console.log(response.data);
                         let userinfo = response.data
                         setData({ userinfo })
-                        if(response.data.user.role==2){
-                            setAdmin(true)
-                        }
+                        
 
 
                     }
@@ -95,7 +80,7 @@ useEffect(() => {
         getUserData();
         // setLoading(false)
     }, [])
-
+console.log(userdata);
 
 
 
@@ -113,4 +98,4 @@ useEffect(() => {
     );
 };
 
-export default Patient;
+export default ReportPg;

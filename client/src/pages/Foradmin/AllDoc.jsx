@@ -9,6 +9,8 @@ import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import axios  from "axios";
+import Button from '@mui/material/Button';
+
 
 const AllDoc = () => {
   const [show, setShow] = useState(false);
@@ -16,6 +18,8 @@ const AllDoc = () => {
   const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [docData, setDocData] = useState([])
+  const navigate=useNavigate();
+
   
   async function getDoctors() {
     try {
@@ -38,8 +42,8 @@ console.log(docData);
       <tr className="contact-card">
         <td><img src={doctor1} className="incircle" /></td>
         <td ><h2>Dr.{data.name}</h2></td>
-        <td><div className="sub1" >261409</div></td>
         <td><div className="sub1" >{data.doctor.generalData.Specialization}</div></td>
+        <td><Button onClick={() => { navigate(`/doctor/${data._id}`) }}>View</Button></td>
         {/* <td><div className="sub1" ></div></td> */}
       </tr>
     </>)

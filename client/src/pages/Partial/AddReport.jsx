@@ -28,11 +28,11 @@ const style = {
 
 
 export default function AddReport(props) {
-    console.log(props.isModelOpen);
+
     const [image, setImage] = React.useState()
 
     const handleUpload = (e) => {
-        console.log(e.target.files);
+
         setImage(e.target.files[0]);
     }
     const handleSubmit = async () => {
@@ -52,7 +52,7 @@ export default function AddReport(props) {
                 path: URL,
             }
 
-            console.log(URL);
+
 
             const response = await fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAL29aOJgF6S5386W-usz9_Be9jPk0J8yE', {
                 method: 'POST',
@@ -81,8 +81,8 @@ export default function AddReport(props) {
                 },
             });
             const data = await response.json();
-            // console.log(data);
-            console.log(data.responses[0].fullTextAnnotation.text);
+
+
             const extractedData= data.responses[0].fullTextAnnotation.text
             const requestOptions = {
                 method: 'PUT',
@@ -91,10 +91,10 @@ export default function AddReport(props) {
             };
             const sendMongoData = await fetch('http://localhost:8989/UserData/AddPresc', requestOptions);
             const finalData = await sendMongoData.json();
-            console.log(finalData);
+
 
         } catch (error) {
-
+console.log(error);
         }
 
 

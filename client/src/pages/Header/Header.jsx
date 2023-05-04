@@ -133,28 +133,27 @@ function Header() {
   };
 
   const navHead = [
-    ["Profile", "Report", "Bills"],
-    ["Profile", "Patient List"],
+    ['Profile'],
+    ["Dashboard","Profile", "Patient List"],
     ["Add Patient", "Patient List", "Add Doctor", "Doctors List"],
   ];
-  console.log(navHead, role, auth);
+
   const navIcon = [
     [
       <AccountBoxIcon />,
 
-      <SummarizeIcon />,
-      <ReceiptLongIcon />,
+      
     ],
-    [<AccountBoxIcon />, <AccountBoxIcon />],
+    [<AccountBoxIcon />,<AccountBoxIcon />,<AccountBoxIcon />],
     [<AccountBoxIcon />, <AccountBoxIcon />,<AccountBoxIcon />, <AccountBoxIcon />],
   ];
 
   const navlink = [
-    [`/Patient/${userID}`, "/PatientReport", "#"],
-    [`/doctor/${userID}`, "/Patients"],
+    [`/Patient/${userID}`],
+    ['/Dashboard',`/doctor/${userID}`, "/Patients"],
     ["/AddPatient", "/AllPatient","/AddDoctor", "/AllDoctor"],
   ];
-  // console.log(navlink[role]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
@@ -5,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 // components
 import Iconify from '../../components/iconify';
+import axios from 'axios';
 // sections
 import {
   AppTasks,
@@ -19,11 +21,99 @@ import {
 } from '../../sections/@dashboard/app';
 
 import Header from '../Header/Header';
+
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage() {
   const theme = useTheme();
+  const [analysis,setAnalysis]= useState({})
+  const [userCnt,setUserCnt] = useState({})
+  const [genderCnt,setGen]= useState([])
+  const [marCnt,setMar]=useState([])
+  const [AgeCnt,setAgeCnt] =useState([])
+  const [resCnt,setRes] = useState([])
+  
+  const getPresdata = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getPresdata`);
+    // console.log(response.data[0].analysis[0].prescAnalysis);
+    setAnalysis(response.data[0].analysis[0].prescAnalysis)
 
+  }
+  const getUserCount = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getCnt`);
+    // console.log(response.data);
+    setUserCnt(response.data)
+
+  }
+  const getGenCount = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getGenderCnt`);
+    // console.log(response.data);
+    setGen(response.data)
+
+  }
+  const getAgeCount = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getAgeCnt`);
+    // console.log(response.data);
+    setAgeCnt(response.data)
+
+  }
+  const getMarCount = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getMarCnt`);
+    // console.log(response.data);
+    setMar(response.data)
+
+  }
+  const getResCount = async ()=>{
+    const response = await axios.get(`http://localhost:8989/Dash/getResCnt`);
+    // console.log(response.data);
+    setRes(response.data)
+
+  }
+
+  const k = Object.keys(analysis)
+  const val = Object.values(analysis)
+  console.log(k,val);
+  useEffect(() => {
+    // setLoading(true)
+    getPresdata();
+    getUserCount();
+    getAgeCount();
+    getGenCount();
+    getMarCount();
+    getResCount();
+    // setLoading(false)
+}, [])
+const chart =[]
+k.map((data,index)=>{
+  chart.push({ label: data, value: val[index] })
+  
+})
+
+const GenChart  =[]
+genderCnt.map((data)=>[
+  GenChart.push({ label: data._id, value: data.count })
+])
+const ageArr = []
+const ageCntArr =[]
+AgeCnt.map((data)=>{
+  ageArr.push(data._id)
+  ageCntArr.push(data.count)
+})
+
+const resArr = []
+const resCntArr =[]
+
+resCnt.map((data)=>{
+  console.log(data);
+  resArr.push(data._id)
+  resCntArr.push(data.count)
+})
+const MarChart  =[]
+marCnt.map((data)=>[
+  MarChart.push({ label: data._id, value: data.count })
+])
+
+console.log(chart);
   return (
     <>
     <Header />
@@ -38,57 +128,33 @@ export default function DashboardAppPage() {
         </Typography>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Patients" total={5} icon={'ant-design:android-filled'} />
+          <Grid item xs={12} sm={6} md={6}>
+            <AppWidgetSummary title="Total Patients" total={userCnt.patients} icon={'ant-design:android-filled'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Total Doctors" total={4} color="info" icon={'ant-design:apple-filled'} />
+          <Grid item xs={12} sm={6} md={6}>
+            <AppWidgetSummary title="Total Doctors" total={userCnt.doctors} color="info" icon={'ant-design:apple-filled'} />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={3}>
+          {/* <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="<>" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="<>" total={234} color="error" icon={'ant-design:bug-filled'} />
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
               title="Age of patients"
-              chartLabels={[
-                '1',
-                '5',
-                '10',
-                '14',
-                '18',
-                '25',
-                '35',
-                '40',
-                '45',
-                '50',
-                '60',
-              ]}
+              chartLabels={ageArr}
               chartData={[
                 {
                   name: 'Total',
                   type: 'column',
                   fill: 'solid',
-                  data: [23, 25, 22, 27, 23, 22, 37, 42, 44, 45, 50],
-                },
-                {
-                  name: 'Females',
-                  type: 'area',
-                  fill: 'gradient',
-                  data: [10, 13, 12, 14, 18, 9, 14, 19, 21, 26, 30],
-                },
-                {
-                  name: 'Males',
-                  type: 'line',
-                  fill: 'solid',
-                  data: [13, 12, 10, 13, 5, 13, 23, 23, 23, 19, 20],
-                },
+                  data: ageCntArr,
+                }
               ]}
             />
           </Grid>
@@ -96,10 +162,7 @@ export default function DashboardAppPage() {
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
               title="Patient Demographics - Gender"
-              chartData={[
-                { label: 'Male', value: 2 },
-                { label: 'Female', value: 3 },
-              ]}
+              chartData={GenChart}
               chartColors={[
                 theme.palette.primary.main,
                 theme.palette.error.main,
@@ -111,23 +174,16 @@ export default function DashboardAppPage() {
             <AppConversionRates
               title="Most used keywords"
               subheader="Symptoms"
-              chartData={[
-                { label: 'fever', value: 5 },
-                { label: 'cold', value: 3 },
-                { label: 'cough', value: 4 },
-                { label: 'chest pain', value: 2 },
-                { label: 'headache', value: 3 },
-                { label: 'stomach pain', value: 1 },
-              ]}
+              chartData={chart}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentSubject
               title="Residence of Patients"
-              chartLabels={['Mumbai', 'Thane', 'Navi Mumbai']}
+              chartLabels={resArr}
               chartData={[
-                { name: 'Count', data: [80, 50, 30] },
+                { name: 'Count', data: resCntArr },
               ]}
               chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
             />
@@ -137,10 +193,7 @@ export default function DashboardAppPage() {
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
               title="Patient Demographics - Maritial Status"
-              chartData={[
-                { label: 'Married', value: 5 },
-                { label: 'Unmarried', value: 7 },
-              ]}
+              chartData={MarChart}
               chartColors={[
                 theme.palette.primary.main,
                 theme.palette.error.main,
@@ -148,7 +201,7 @@ export default function DashboardAppPage() {
             />
           </Grid>
 
-          <Grid item xs={12} md={6} lg={8}>
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
               title="Age vs Addictions"
               chartLabels={[
@@ -170,7 +223,7 @@ export default function DashboardAppPage() {
                 },
               ]}
             />
-          </Grid>
+          </Grid> */}
 
           {/* <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate

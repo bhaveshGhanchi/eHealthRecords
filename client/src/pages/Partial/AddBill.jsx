@@ -34,7 +34,7 @@ export default function AddBill(props) {
 
     async function handleClick() {
         setLoading(true);
-        console.log(cost, title, desc);
+
         let newDate = new Date()
 
         const requestOptions = {
@@ -50,7 +50,7 @@ export default function AddBill(props) {
         };
         const sendMongoData = await fetch('http://localhost:8989/UserData/AddBill', requestOptions);
         const finalData = await sendMongoData.json();
-        console.log(finalData);
+
         setLoading(false)
         handleClose()
     }

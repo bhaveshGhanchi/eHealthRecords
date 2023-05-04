@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./Patient.css";
-import AddReport from "./AddReport";
+
+
 import Header from "../Header/Header";
 import { useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -14,36 +14,24 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Link from '@mui/material/Link';
 import axios from "axios";
-import PatientDetails from "./PatientDetails";
+import EditPatientDetails from "./EditPatientDetails";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+
 // import { set } from "mongoose";
 
-const Patient = () => {
-    const [expanded, setExpanded] = React.useState(false);
-
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-    const [expandedReports, setExpandedReports] = React.useState(false);
-
-    const handleChangeReports = (panel) => (event, isExpanded) => {
-        setExpandedReports(isExpanded ? panel : false);
-    };
-    const [expandedPres, setExpandedPres] = React.useState(false);
-
-    const handleChangePres = (panel) => (event, isExpanded) => {
-        setExpandedPres(isExpanded ? panel : false);
-    };
+const EditPatient = () => {
+    
+    
     const [show, setShow] = useState(false);
     const toggle = () => setShow((prevState) => !prevState);
     const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(false);
     const [aval, setAval] = useState(false)
     const [userdata, setData] = useState({})
-    const id = useParams().id;
+    // const [id,setID] = useState() 
     const navigate = useNavigate()
-
+const id = useParams().id
 useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -53,7 +41,7 @@ useEffect(() => {
         localStorage.removeItem("token");
         navigate("/login");
     } else {
-          console.log(localData,"final");
+        //   setID(localData.user._id)
         if(localData.user.role===2){
 
             setAdmin(true)
@@ -62,21 +50,19 @@ useEffect(() => {
       }
     }
   }, []);
+  console.log(id);
     async function getUserData() {
-        let dob
+        
         try {
             axios.get(`http://localhost:8989/UserData/GetPatientDetails/${id}`)
                 .then((response) => {
 
                     if (response.data) {
                         setAval(true)
-                        // dob = response.data.demographics.DOB.split("T")
-                        // console.log(response.data);
+                        
                         let userinfo = response.data
                         setData({ userinfo })
-                        if(response.data.user.role==2){
-                            setAdmin(true)
-                        }
+                        
 
 
                     }
@@ -106,11 +92,11 @@ useEffect(() => {
                 {loading ? (
                     <CircularProgress />
                 ) : (
-                    aval &&<PatientDetails userdata={userdata} admin={admin} userid={id} />
+                    aval &&<EditPatientDetails userdata={userdata} admin={admin} userid={id} />
                 )}
             </div>
         </>
     );
 };
 
-export default Patient;
+export default EditPatient;
