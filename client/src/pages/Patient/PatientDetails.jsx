@@ -272,6 +272,7 @@ const PatientDetails = (props) => {
                         
                     </Typography>
                 </AccordionDetails>
+                
             </Accordion>
         </>)
     })
@@ -391,6 +392,10 @@ const PatientDetails = (props) => {
                     >
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
                         <h3>Bills</h3>
+                        <Grid item >
+                                <h4>Total Amount {userinfo.totalBill}</h4>
+                            </Grid>
+                            
                         </Typography>
                         {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                     </AccordionSummary>
@@ -403,6 +408,7 @@ const PatientDetails = (props) => {
                             {UserBills}
                         </Typography>
                     </AccordionDetails>
+                    
                 </Accordion>
             </section>
             {!admin ? (

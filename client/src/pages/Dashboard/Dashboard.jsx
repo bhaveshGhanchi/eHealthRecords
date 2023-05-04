@@ -21,6 +21,7 @@ import {
 } from '../../sections/@dashboard/app';
 
 import Header from '../Header/Header';
+import { Icon } from '@iconify/react';
 
 // ----------------------------------------------------------------------
 
@@ -119,21 +120,21 @@ console.log(chart);
     <Header />
     <div className='mainPage' >
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> Dashboard</title>
       </Helmet>
 
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Hi, Welcome back
+        <Typography variant="h3" sx={{ mb: 5 }}>
+          Dashboard
         </Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={6}>
-            <AppWidgetSummary title="Total Patients" total={userCnt.patients} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Total Patients" total={userCnt.patients} icon={'ant-design:user-outlined'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={6}>
-            <AppWidgetSummary title="Total Doctors" total={userCnt.doctors} color="info" icon={'ant-design:apple-filled'} />
+            <AppWidgetSummary title="Total Doctors" total={userCnt.doctors} color="info" icon={'maki:doctor'} />
           </Grid>
 
           {/* <Grid item xs={12} sm={6} md={3}>
@@ -150,12 +151,13 @@ console.log(chart);
               chartLabels={ageArr}
               chartData={[
                 {
-                  name: 'Total',
+                  name: 'No of Patients',
                   type: 'column',
                   fill: 'solid',
                   data: ageCntArr,
                 }
               ]}
+              
             />
           </Grid>
 
