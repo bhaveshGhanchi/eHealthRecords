@@ -1,35 +1,40 @@
-#hero{
+#hero {
     min-height: 100vh;
     display: grid;
 }
+
 .Landing_img {
     width: 400px;
     height: 100%;
     /* animation: updown 6s ease-out forwards;
     animation-iteration-count: infinite ; */
 }
-.Image_box{
+
+.Image_box {
     max-width: 40%;
 }
-.container{
+
+.container {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.content{
-    
+.content {
     max-width: 50%;
 }
-.content_text h2, p{
+
+.content_text h2,
+p {
     text-align: left;
 }
-.content_text h2{
+
+.content_text h2 {
     color: rgb(71, 182, 226);
 }
 
-.login_but{
+.login_but {
     width: 100px;
     height: 35px;
     background-color: rgb(71, 182, 226);
@@ -39,13 +44,16 @@
     transition: transform .1s;
     cursor: pointer;
 }
+
 .login_but:hover {
     transform: scale(1.03);
-    
 }
+
 .login_but:active {
     transform: scale(0.98);
 }
+
+
 /* @keyframes updown {
     0% {
       transform: translateX(0%);
@@ -57,4 +65,3 @@
       transform: translateX(0%);
     }
   } */
-  

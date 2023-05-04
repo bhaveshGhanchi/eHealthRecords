@@ -13,13 +13,9 @@ const Home = () => {
                 <div className="container">
                     <div className="content">
                         <div className="content_text">
-                            <h2 className="content_head">Hello</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-                                est harum voluptate eius, architecto delectus autem illum tempora
-                                veritatis laudantium suscipit expedita dicta error ad quia
-                                repudiandae tempore ut optio.
-                            </p>
+                            <h2>
+                                EHR System made to maintain electronic health records and perform clinical text analysis.
+                            </h2>
                         </div>
                         <div className="link_but">
                             <button onClick={()=>{setShow(true); console.log(show);}}className="login_but">Login</button>

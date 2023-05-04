@@ -82,7 +82,7 @@ const PatientDetails = (props) => {
                 >
                     <Typography sx={{ width: '33%', flexShrink: 0 }}>
                         <Link href="#" color="inherit" underline="hover">
-                            Report_name
+                            Report Name
                         </Link>
 
                     </Typography>
@@ -104,59 +104,59 @@ const PatientDetails = (props) => {
                                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                     >
                                         <Grid item xs={5}>
-                                            <h6>haemoglobin:</h6>
+                                            <h6>Haemoglobin</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.haemoglobin}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>RBC:</h6>
+                                            <h6>RBC</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.RBC}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>WBC:</h6>
+                                            <h6>WBC</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.WBC}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>platelet:</h6>
+                                            <h6>Platelet</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.platelet}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>cholesterol:</h6>
+                                            <h6>Cholesterol</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.cholesterol}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>glucose:</h6>
+                                            <h6>Glucose</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.glucoseFasting}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>vitB12:</h6>
+                                            <h6>vitB12</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.vitB12}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>vitD:</h6>
+                                            <h6>vitD</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.vitD}</h6>
                                         </Grid>
 
                                         <Grid item xs={5}>
-                                            <h6>Report Abnormalities:</h6>
+                                            <h4>Report Abnormalities</h4>
                                         </Grid>
                                         <Grid item xs={7}>
-                                            <h6>{JSON.stringify(data.reportAbnormalities)}</h6>
+                                            <h4 >{JSON.stringify(data.reportAbnormalities)}</h4>
                                         </Grid>
                                     </Grid>
                                 </div>
@@ -182,7 +182,7 @@ const PatientDetails = (props) => {
                     >
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
                             <Link href={data.url} color="inherit" underline="hover">
-                                Add Prescription_file1
+                                Add Prescription
                             </Link>
 
                         </Typography>
@@ -236,35 +236,40 @@ const PatientDetails = (props) => {
                                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                     >
                                         <Grid item xs={5}>
-                                            <h6>Date:</h6>
+                                            <h6>Date</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.date && data.date.split("T")[0]}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>Time:</h6>
+                                            <h6>Time</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.date && data.date.split("T")[1]}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>Cost:</h6>
+                                            <h6>Amount</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.cost}</h6>
                                         </Grid>
                                         <Grid item xs={5}>
-                                            <h6>Description:</h6>
+                                            <h6>Description</h6>
                                         </Grid>
                                         <Grid item xs={7}>
                                             <h6>{data.description}</h6>
                                         </Grid>
+                                        
 
 
                                     </Grid>
+                                    
                                 </div>
+                               
                             </Grid>
+                            
                         </Grid>
+                        
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -275,7 +280,7 @@ const PatientDetails = (props) => {
         <>
             <section className="demographics">
                 <div className="divHead">
-                    <h4>General Information</h4>
+                    <h3>General Information</h3>
                     <Divider orientation="vertical" flexItem />
                 </div>
                 <div className="gridOuter">
@@ -295,31 +300,31 @@ const PatientDetails = (props) => {
                                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                 >
                                     <Grid item xs={6}>
-                                        <h5>patient id:</h5>
+                                        <h6>Patient Id - </h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h5> 18902</h5>
+                                        <h6> {userinfo._id}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>Name:</h6>
+                                        <h6>Name</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.adminDetails.name}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>Email:</h6>
+                                        <h6>Email</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.user.email || ""}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>phone no:</h6>
+                                        <h6>Contact No</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.user.phone}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>Age:</h6>
+                                        <h6>Age</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.demographics.age}</h6>
@@ -331,13 +336,13 @@ const PatientDetails = (props) => {
                                         <h6>{userinfo.demographics.gender}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>DOB:</h6>
+                                        <h6>DOB</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{dob[0]}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>address:</h6>
+                                        <h6>Address</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>
@@ -345,19 +350,19 @@ const PatientDetails = (props) => {
                                         </h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>maritialStatus</h6>
+                                        <h6>Maritial Status </h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.demographics.maritialStatus}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>Insurance</h6>
+                                        <h6>Insurance Details</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.adminDetails.insurance}</h6>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <h6>Emergency Contact</h6>
+                                        <h6>Emergency Contact Name</h6>
                                     </Grid>
                                     <Grid item xs={6}>
                                         <h6>{userinfo.adminDetails.emergencyContactName}</h6>
@@ -385,7 +390,7 @@ const PatientDetails = (props) => {
                         id="panel1bh-header"
                     >
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                            Bills
+                        <h3>Bills</h3>
                         </Typography>
                         {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                     </AccordionSummary>
@@ -404,7 +409,7 @@ const PatientDetails = (props) => {
                 <>
                     <section className="demographics">
                         <div className="divHead">
-                            <h4>History</h4>
+                            <h3>History</h3>
                             <Divider orientation="vertical" flexItem />
                         </div>
                         <div className="gridOuter">
@@ -422,7 +427,7 @@ const PatientDetails = (props) => {
                                             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                         >
                                             <Grid item xs={5}>
-                                                <h6>Addiction:</h6>
+                                                <h6>Addictions</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
@@ -430,7 +435,7 @@ const PatientDetails = (props) => {
                                                 </h6>
                                             </Grid>
                                             <Grid item xs={5}>
-                                                <h6>Family History:</h6>
+                                                <h6>Family History</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
@@ -446,7 +451,7 @@ const PatientDetails = (props) => {
                                                 </h6>
                                             </Grid>
                                             <Grid item xs={5}>
-                                                <h6>Allergy:</h6>
+                                                <h6>Allergies</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
@@ -465,7 +470,7 @@ const PatientDetails = (props) => {
                     </section>
                     <section className="demographics">
                         <div className="divHead">
-                            <h4>Vital Signs</h4>
+                            <h3>Vital Signs</h3>
                             <Divider orientation="vertical" flexItem />
                         </div>
                         <div className="gridOuter">
@@ -483,24 +488,24 @@ const PatientDetails = (props) => {
                                             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                                         >
                                             <Grid item xs={5}>
-                                                <h6>Height:</h6>
+                                                <h6>Height</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
                                                     {/* 4ft 2 inch */}
-                                                    {userinfo.vitalSigns.height} cms
+                                                    {userinfo.vitalSigns.height} cm
                                                 </h6>
                                             </Grid>
                                             <Grid item xs={5}>
-                                                <h6>Weight:</h6>
+                                                <h6>Weight</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
-                                                    {userinfo.vitalSigns.weight} kgs
+                                                    {userinfo.vitalSigns.weight} kg
                                                 </h6>
                                             </Grid>
                                             <Grid item xs={5}>
-                                                <h6>Blood Pressure:</h6>
+                                                <h6>Blood Pressure</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
@@ -508,7 +513,7 @@ const PatientDetails = (props) => {
                                                 </h6>
                                             </Grid>
                                             <Grid item xs={5}>
-                                                <h6>BMI:</h6>
+                                                <h6>BMI</h6>
                                             </Grid>
                                             <Grid item xs={7}>
                                                 <h6>
@@ -532,7 +537,7 @@ const PatientDetails = (props) => {
                                 id="panel1bh-header"
                             >
                                 <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                    Reports
+                                    <h3>Reports</h3>
                                 </Typography>
                                 {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
                             </AccordionSummary>
@@ -551,7 +556,7 @@ const PatientDetails = (props) => {
                                 id="panel1bh-header"
                             >
                                 <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                                    Prescriptions
+                                    <h3>Prescriptions</h3>
 
                                 </Typography>
                                 {/* <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography> */}
