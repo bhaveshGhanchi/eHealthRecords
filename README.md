@@ -42,4 +42,6 @@ Scope:
 7. AI/ML:
   - Handwriting recognition model training
   - Clinical text mining and analysis
+
+<br/>
 By addressing these components, the eHealthRecords application will provide a comprehensive and efficient solution for healthcare providers and patients.
