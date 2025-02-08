@@ -6,7 +6,7 @@ const getDoctorData= async(req,res)=>{
     try {
         const { id } = req.params;
 
-        console.log(id);
+        // console.log(id);
         DoctorDataModel.findOne({ user: id })
             .populate('user')
             // .exec()
@@ -23,7 +23,7 @@ const getDoctorData= async(req,res)=>{
 const AddEdu=(req,res)=>{
     try {
         const  {id,edu,clg,loca} = req.body;
-        console.log(id,edu,clg,loca);
+        // console.log(id,edu,clg,loca);
         
         
         DoctorDataModel.findOneAndUpdate(
@@ -48,7 +48,7 @@ const AddEdu=(req,res)=>{
 const AddWork=(req,res)=>{
     try {
         const  {id,title,startDate,endDate,desc} = req.body;
-        console.log(id,title,startDate,endDate,desc);
+        // console.log(id,title,startDate,endDate,desc);
         
         
         DoctorDataModel.findOneAndUpdate(

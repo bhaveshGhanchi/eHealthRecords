@@ -5,7 +5,8 @@ require('dotenv').config()
 
 // URl to connect with the atlas server
 // Cluster name  and password are being saved in .env file and called here
-uri=`mongodb+srv://Mernmp:${process.env.DB_PASS}@cluster0.mbaqegg.mongodb.net/EHR?retryWrites=true&w=majority`
+uri=`mongodb+srv://admin:${process.env.PASS}@cluster0.mbaqegg.mongodb.net/EHR?retryWrites=true&w=majority`
+console.log(process.env.PASS);
 
 const options = {
     autoIndex: false, 

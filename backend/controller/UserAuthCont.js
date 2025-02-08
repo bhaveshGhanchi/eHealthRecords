@@ -30,7 +30,7 @@ const register = async(req,res,next)=>{
         });
         await user.save()
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({message:"Unable to add"})
     }
     if(!user){
@@ -38,7 +38,7 @@ const register = async(req,res,next)=>{
     }
     if(user){
         const token = jwt.sign({user}, privateKey)    
-        console.log(token);
+        // console.log(token);
         return res.status(200).json({tokenid: token})
     }
 }
@@ -53,7 +53,7 @@ const login = async(req,res,next)=>{
             password: req.body.password
         })
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json({status:"Login failed",message:"error"})
     }
     if(!user){
@@ -71,7 +71,7 @@ const getAllPatients = async (req,res)=>{
         // console.log(users);
         return res.status(200).json(users)
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json(error)
     }
 }

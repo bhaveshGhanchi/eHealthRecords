@@ -17,7 +17,7 @@ const AddPatient = async (req, res) => {
 
     try {
         const authData = await UserAuthModel.findOne({ email: email,role:0, user: { $exists: false } })
-        console.log(authData);
+        // console.log(authData);
         const userData = new UserDataModel({
             adminDetails: {
                 name: authData.name,
@@ -50,7 +50,7 @@ const AddPatient = async (req, res) => {
             user: authData._id
         })
         await userData.save()
-        console.log(userData);
+        // console.log(userData);
         const userauth = await UserAuthModel.findOneAndUpdate({ email: email }, { doctor: userData._id })
         userauth.save()
         res.status(200).json({ status: "OK" })
@@ -71,12 +71,12 @@ const AddDoctor = async (req,res) => {
         address,
         age,
         gender} = req.body
-        console.log(email,
-            dob,
-            specialization,
-            address,
-            age,
-            gender);
+        // console.log(email,
+        //     dob,
+        //     specialization,
+        //     address,
+        //     age,
+        //     gender);
     try {
         const authData = await UserAuthModel.findOne({ email: email,role:1, doctor: { $exists: false } })
         console.log(authData);
@@ -113,10 +113,10 @@ const getAllDoctors = async (req,res)=>{
     
     try {
         const doctors = await UserAuthModel.find({role:1, doctor : { $exists : true }}).populate("doctor")
-        console.log(doctors);
+        // console.log(doctors);
         return res.status(200).json(doctors)
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return res.status(500).json(error)
     }
 }

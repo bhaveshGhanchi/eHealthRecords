@@ -82,7 +82,7 @@ const GetPatientData = (req, res) => {
 const AddPres = (req, res) => {
     try {
         const { id, URL, text } = req.body;
-        console.log(id, URL, text);
+        // console.log(id, URL, text);
         // res.json({URL:URL})
 
         UserDataModel.findOneAndUpdate(
@@ -108,7 +108,7 @@ const AddPres = (req, res) => {
 const AddBill = (req, res) => {
     try {
         const { id, title, cost, desc, date } = req.body;
-        console.log(id, title, cost, desc, date);
+        // console.log(id, title, cost, desc, date);
         // res.json({URL:URL})
 
         UserDataModel.findOneAndUpdate(

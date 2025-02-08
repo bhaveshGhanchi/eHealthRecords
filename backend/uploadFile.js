@@ -1,7 +1,7 @@
 const { getStorage, ref, getDownloadURL, uploadBytesResumable } = require("firebase/storage");
 const multer = require("multer");
 const express = require('express');
-const fb_app = require("../backend/firebase")
+const fb_app = require("./firebase")
 const storage = getStorage();
 const router = express.Router();
 
